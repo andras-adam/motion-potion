@@ -26,7 +26,12 @@
       "permissions": [
         "android.permission.CAMERA",
         "android.permission.ACTIVITY_RECOGNITION"
-      ]
+      ],
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyBkJGlFkjzqy-M7vfprkbSTSVu5RZf2VbU"
+        }
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
