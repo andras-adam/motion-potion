@@ -1,17 +1,39 @@
+import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { registerRootComponent } from 'expo'
 import { MotionConstants } from 'expo-motion-detector'
 import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, Text, View } from 'react-native'
+import { Suspense } from 'react'
+import { ActivityIndicator, StyleSheet, View } from 'react-native'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
+import { HomeScreen } from './screens/home/HomeScreen'
+import { NavigatorParamList } from './types/navigation'
 
+
+// Create stack navigator
+const Stack = createNativeStackNavigator<NavigatorParamList>()
 
 export default function App() {
   console.log(MotionConstants.Android)
 
   return (
-    <View style={styles.container}>
-      <Text>Wizard Lizard</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Suspense fallback={
+      <View style={styles.container}>
+        <ActivityIndicator />
+      </View>
+    }>
+      <SafeAreaProvider style={styles.wrapper}>
+        <GestureHandlerRootView style={styles.wrapper}>
+          <NavigationContainer>
+            <Stack.Navigator initialRouteName="Home">
+              <Stack.Screen name="Home" component={HomeScreen} />
+            </Stack.Navigator>
+            <StatusBar style="auto" />
+          </NavigationContainer>
+        </GestureHandlerRootView>
+      </SafeAreaProvider>
+    </Suspense>
   )
 }
 
@@ -21,6 +43,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  wrapper: {
+    flex: 1
   }
 })
 
