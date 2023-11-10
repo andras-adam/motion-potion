@@ -1,1 +1,1 @@
-# wizardlizard
+# Wizard Lizard

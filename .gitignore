@@ -1,0 +1,46 @@
+# Git ignore
+
+# expo
+.expo/
+
+.astro/
+.wrangler/
+
+# output
+dist/
+build/
+web-build/
+
+# logs and reports
+logs
+*.log
+npm-debug.*
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# dependencies
+node_modules/
+
+# cache
+*.tsbuildinfo
+.npm
+.*cache
+
+# dotenv
+.env
+.env.test
+.dev.vars
+
+# macOS
+.DS_Store
+
+# IDE
+.idea
+.vscode
+
+# etc
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*

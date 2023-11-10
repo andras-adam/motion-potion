@@ -1,0 +1,35 @@
+# Git attributes
+
+# Details per file setting:
+#   text    Normalized from CRLF to LF
+#   binary  Left unchanged
+
+# All files auto-detected as text
+*               text=auto eol=lf
+
+# Source code
+*.ts            text eol=lf
+*.tsx           text eol=lf
+*.js            text eol=lf
+*.jsx           text eol=lf
+*.json          text eol=lf
+
+# Graphics
+*.svg           text eol=lf
+*.png           binary
+*.jpg           binary
+*.jpeg          binary
+*.ico           binary
+
+# Configuration files
+*.env           text eol=lf
+*.yml           text eol=lf
+*.yaml          text eol=lf
+*.lock          text eol=lf
+.gitattributes  text eol=lf
+*.*rc           text eol=lf
+*.*ignore       text eol=lf
+
+# etc
+*.md            text eol=lf
+LICENSE         text eol=lf
