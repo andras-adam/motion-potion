@@ -24,6 +24,8 @@
       },
       "package": "com.andras.adam.wizardlizard",
       "permissions": [
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.ACCESS_COARSE_LOCATION",
         "android.permission.CAMERA",
         "android.permission.ACTIVITY_RECOGNITION"
       ],
@@ -40,6 +42,14 @@
       "eas": {
         "projectId": "2e315d9a-5719-4103-80e0-b5acd1d08309"
       }
-    }
+    },
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow Motion Potion to use your location."
+        }
+      ]
+    ]
   }
 }
