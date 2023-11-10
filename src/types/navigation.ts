@@ -4,6 +4,7 @@ import { NavigationProp, RouteProp } from '@react-navigation/native'
 // Screens and their required parameters in this navigator
 export type NavigatorParamList = {
   Home: undefined
+  Other: { foo: string }
 }
 
 // Helper type for useNavigation() hooks

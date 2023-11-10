@@ -8,6 +8,7 @@ import { ActivityIndicator, StyleSheet, View } from 'react-native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { HomeScreen } from './screens/home/HomeScreen'
+import { OtherScreen } from './screens/other/OtherScreen'
 import { NavigatorParamList } from './types/navigation'
 
 
@@ -28,6 +29,7 @@ export default function App() {
           <NavigationContainer>
             <Stack.Navigator initialRouteName="Home">
               <Stack.Screen name="Home" component={HomeScreen} />
+              <Stack.Screen name="Other" component={OtherScreen} />
             </Stack.Navigator>
             <StatusBar style="auto" />
           </NavigationContainer>
