@@ -1,49 +1,43 @@
-import { useNavigation } from "@react-navigation/native";
-import {
-  Button,
-  StyleSheet,
-  Text,
-  TouchableNativeFeedback,
-  View,
-} from "react-native";
-import { UseNavigation } from "../../types/navigation";
-import MapView, { Region } from "react-native-maps";
-
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { Ionicons } from "@expo/vector-icons";
-import { useState } from "react";
-import * as Location from "expo-location";
+import { useNavigation } from '@react-navigation/native';
+import { Button, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { UseNavigation } from '../../types/navigation';
+import MapView from 'react-native-maps';
 
 export function MapScreen() {
-  const { goBack } = useNavigation<UseNavigation<"Home">>();
-  const [location, setLocation] = useState<Region>({
-    latitude: 0,
-    longitude: 0,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
-  });
+  const { navigate } = useNavigation<UseNavigation<'Map'>>();
+
   return (
     <View style={styles.screen}>
       <MapView
         style={{ flex: 1 }}
-        onMapReady={async () => {
-          let location = await Location.getCurrentPositionAsync();
-          let coords = location.coords;
-          setLocation({
-            latitude: coords.latitude,
-            longitude: coords.longitude,
-            latitudeDelta: 0,
-            longitudeDelta: 0,
-          });
+        initialRegion={{
+          latitude: 37.78825,
+          longitude: -122.4324,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
         }}
-        initialRegion={location}
       />
+      <TouchableOpacity style={styles.buttonContainer}>
+        <Button title="Button" onPress={() => { /* action here */ }} />
+      </TouchableOpacity>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
+    padding: 20,
+    gap: 20
   },
-});
+  buttonContainer: {
+    position: 'absolute',
+    top: 20,
+    left: 20,
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white', // or any other color
+    elevation: 3, // for Android shadow
+  }
+})
