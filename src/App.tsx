@@ -1,7 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { registerRootComponent } from 'expo'
-import { MotionConstants } from 'expo-motion-detector'
 import { StatusBar } from 'expo-status-bar'
 import { Suspense } from 'react'
 import { ActivityIndicator, StyleSheet, View } from 'react-native'
@@ -16,8 +15,6 @@ import { NavigatorParamList } from './types/navigation'
 const Stack = createNativeStackNavigator<NavigatorParamList>()
 
 export default function App() {
-  console.log(MotionConstants.Android)
-
   return (
     <Suspense fallback={
       <View style={styles.container}>
