@@ -9,6 +9,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { HomeScreen } from './screens/home/HomeScreen'
 import { OtherScreen } from './screens/other/OtherScreen'
 import { NavigatorParamList } from './types/navigation'
+import { MapScreen } from './screens/map/MapScreen'
 
 
 // Create stack navigator
@@ -27,6 +28,7 @@ export default function App() {
             <Stack.Navigator initialRouteName="Home">
               <Stack.Screen name="Home" component={HomeScreen} />
               <Stack.Screen name="Other" component={OtherScreen} />
+              <Stack.Screen name="Map" component={MapScreen} />
             </Stack.Navigator>
             <StatusBar style="auto" />
           </NavigationContainer>
