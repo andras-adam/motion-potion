@@ -12,6 +12,7 @@ import { NavigatorParamList } from "./types/navigation";
 import { MapScreen } from "./screens/map/MapScreen";
 import * as Location from "expo-location";
 import CastScreen from "./screens/cast/CastScreen";
+import { StepOne } from './screens/spell/StepOne'
 
 // Create stack navigator
 const Stack = createNativeStackNavigator<NavigatorParamList>();
@@ -47,6 +48,11 @@ export default function App() {
                 name="Cast"
                 options={{ headerShown: false }}
                 component={CastScreen}
+              />
+              <Stack.Screen
+                name="Spell"
+                options={{ headerShown: false }}
+                component={StepOne}
               />
             </Stack.Navigator>
             <StatusBar style="auto" />
