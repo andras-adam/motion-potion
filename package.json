@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "@types/double-ended-queue": "^2.1.6",
     "@types/react": "~18.2.14",
     "bundled-eslint-config": "^0.2.12",
     "eas-cli": "^5.7.0",

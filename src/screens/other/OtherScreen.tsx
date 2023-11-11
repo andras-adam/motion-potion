@@ -27,11 +27,11 @@ export function OtherScreen() {
       motionData.current.push(datum);
     }
     if (motionData.current.length % 20 == 0) {
-      let res = detect_figure(motionData.current).map((pos) => ({
-        x: pos.ax / 8 + 0.5,
-        y: -pos.ay / 8 + 0.5,
-      }));
-      setEntries(res);
+      // let res = detect_figure(motionData.current).map((pos) => ({
+      //   x: pos.ax / 8 + 0.5,
+      //   y: -pos.ay / 8 + 0.5,
+      // }));
+      // setEntries(res);
     }
   }, []);
 

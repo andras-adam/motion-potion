@@ -1,4 +1,4 @@
-enum Movement {
+export enum Movement {
   unclassified = -1,
   line_y = 1,
   line_x = 2,
@@ -26,24 +26,24 @@ type Position = {
 };
 
 // TMP Ret type
-export function detect_figure(time_series: InputDatum[]): Position[] {
+export function detect_figure(time_series: InputDatum[]): Movement[] {
   let positions = track_position(time_series);
   // console.log(positions);
   let motion_periods = get_motion_periods(positions);
 
   if (!motion_periods) {
-    return [];
+    return [Movement.unclassified];
   }
 
+  let classifications: Movement[] = [];
   for (const mp of motion_periods) {
     let classification = classify_motion_period(mp);
     if (classification != Movement.unclassified) {
-      console.log(classification);
-      return motion_periods[0] || [];
+      classifications.push(classification);
     }
   }
-  // return Movement.unclassified;
-  return motion_periods[0] || [];
+  return classifications;
+  // return motion_periods[0] || [];
 }
 
 function classify_motion_period(motion_period: Position[]): Movement {

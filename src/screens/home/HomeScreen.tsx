@@ -13,15 +13,9 @@ export function HomeScreen() {
         onPress={() => navigate("Other", { foo: "bar" })}
       />
       <Text>Home screen</Text>
-      <Button
-        title="To map screen"
-        onPress={() => navigate("Map")}
-      />
+      <Button title="To map screen" onPress={() => navigate("Map")} />
       <Text>Spell screen</Text>
-      <Button
-        title="To spell screen"
-        onPress={() => navigate("Spell")}
-      />
+      <Button title="To spell screen" onPress={() => navigate("SpellCast")} />
     </View>
   );
 }
