@@ -11,7 +11,7 @@ export function HomeScreen() {
       <Text>Home screen</Text>
       <Button
         title="To other screen"
-        onPress={() => navigate("Other", { foo: "bar" })}
+        onPress={() => navigate("Debug")}
       />
       <Text>Home screen</Text>
       <Button title="To map screen" onPress={() => navigate("Map")} />
