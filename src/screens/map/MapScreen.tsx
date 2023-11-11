@@ -39,10 +39,11 @@ export function MapScreen() {
         { latitude: location.latitude, longitude: location.longitude },
         markerCoord
       );
-      const threshold = 20;
+      const threshold = 200;
 
       if (distance <= threshold) {
         setIsTooFarPopupVisible(false);
+        navigate("SpellStepOne")
       } else {
         setIsTooFarPopupVisible(true);
       }
