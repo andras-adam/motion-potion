@@ -17,9 +17,9 @@ import { StepFour } from "./screens/spell/StepFour";
 import { StepThree } from "./screens/spell/StepThree";
 import { StepTwo } from "./screens/spell/StepTwo";
 import { IngredientContextProvider } from './contexts/IngredientContext'
-import { SpiceStepOne } from './screens/spell spice/SpiceStepOne';
-import { SpiceStepTwo } from './screens/spell spice/SpiceStepTwo';
-import { SpiceStepThree } from './screens/spell spice/SpiceStepThree';
+import { SpiceStepOne } from './screens/spice/SpiceStepOne';
+import { SpiceStepTwo } from './screens/spice/SpiceStepTwo';
+import { SpiceStepThree } from './screens/spice/SpiceStepThree';
 import { PotStepOne } from './screens/pot/PotStepOne';
 import { PotStepTwo } from './screens/pot/PotStepTwo';
 import { PotStepThree } from './screens/pot/PotStepThree';
@@ -88,7 +88,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#000000",
     alignItems: "center",
     justifyContent: "center",
   },
