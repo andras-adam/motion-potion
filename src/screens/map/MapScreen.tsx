@@ -77,9 +77,9 @@ export function MapScreen() {
     const a =
       Math.sin(delta_phi / 2) * Math.sin(delta_phi / 2) +
       Math.cos(toRad_1) *
-      Math.cos(toRad_2) *
-      Math.sin(delta_long / 2) *
-      Math.sin(delta_long / 2);
+        Math.cos(toRad_2) *
+        Math.sin(delta_long / 2) *
+        Math.sin(delta_long / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
   }
@@ -210,7 +210,7 @@ export function MapScreen() {
                 "pot"
               );
             } else {
-              setingredientsFullModal(true)
+              setingredientsFullModal(true);
             }
           }}
         />
@@ -260,7 +260,9 @@ export function MapScreen() {
           onRequestClose={() => setingredientsFullModal(false)}
         >
           <View style={styles.popupContainer}>
-            <Text style={styles.modalText}>Gather at least 2 ingredients first!</Text>
+            <Text style={styles.modalText}>
+              Gather at least 2 ingredients first!
+            </Text>
             <View style={styles.modalButtonsContainer}>
               <Pressable
                 onPress={() => setingredientsFullModal(false)}
