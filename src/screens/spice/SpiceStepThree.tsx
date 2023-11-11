@@ -6,15 +6,24 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { UseNavigation } from "../../types/navigation";
+import { Ingredient, useIngredients } from "../../contexts/IngredientContext";
+import { useCallback } from "react";
 
 export function SpiceStepThree() {
   const { navigate } = useNavigation<UseNavigation<"SpellStepFive">>();
+
+  const ingredients = useIngredients();
+
+  const onSubmit = useCallback(() => {
+    ingredients.collect(Ingredient.Chili);
+    navigate("Map");
+  }, [ingredients, navigate]);
 
   return (
     <View style={styles.screen}>
       <View style={styles.returnAbs}>
         <TouchableWithoutFeedback
-          onPress={() => navigate('Map')}
+          onPress={() => navigate("Map")}
           style={styles.touchable}
         >
           <View style={styles.touchableContent}></View>
@@ -23,10 +32,7 @@ export function SpiceStepThree() {
       {/* Touchable hitbox for the image button */}
 
       <View style={styles.absolute}>
-        <TouchableWithoutFeedback
-          onPress={() => navigate("Map")}
-          style={styles.touchable}
-        >
+        <TouchableWithoutFeedback onPress={onSubmit} style={styles.touchable}>
           <View style={styles.touchableContent}></View>
         </TouchableWithoutFeedback>
       </View>
