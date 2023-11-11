@@ -30,7 +30,6 @@ export function MapScreen() {
   });
   const [renderReady, setRenderReady] = useState(false);
   const [isTooFarPopupVisible, setIsTooFarPopupVisible] = useState(false);
-  const [isProximityPopupVisible, setIsProximityPopupVisible] = useState(false);
 
   const { navigate } = useNavigation<UseNavigation<"Map">>();
 
@@ -40,13 +39,11 @@ export function MapScreen() {
         { latitude: location.latitude, longitude: location.longitude },
         markerCoord
       );
-      const threshold = 500;
+      const threshold = 20;
 
       if (distance <= threshold) {
-        setIsProximityPopupVisible(true);
         setIsTooFarPopupVisible(false);
       } else {
-        setIsProximityPopupVisible(false);
         setIsTooFarPopupVisible(true);
       }
     }
@@ -188,33 +185,6 @@ export function MapScreen() {
           <Marker key={idx} coordinate={item.coord} image={item.asset} />
         ))}
       </MapView>
-
-      {isProximityPopupVisible && (
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={isProximityPopupVisible}
-          onRequestClose={() => setIsProximityPopupVisible(false)}
-        >
-          <View style={styles.popupContainer}>
-            <Text style={styles.modalText}>You are close to the marker!</Text>
-            <View style={styles.modalButtonsContainer}>
-              <Pressable
-                onPress={() => navigate("SpellStepOne")}
-                style={styles.modalButton}
-              >
-                <Text style={styles.modalButtonText}>Collect</Text>
-              </Pressable>
-              <Pressable
-                onPress={() => setIsProximityPopupVisible(false)}
-                style={styles.modalButton}
-              >
-                <Text style={styles.modalButtonText}> Close</Text>
-              </Pressable>
-            </View>
-          </View>
-        </Modal>
-      )}
       {isTooFarPopupVisible && (
         <Modal
           animationType="slide"
