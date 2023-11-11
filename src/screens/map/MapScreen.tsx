@@ -21,7 +21,6 @@ type MarkerItem = {
 };
 
 export function MapScreen() {
-  const { goBack } = useNavigation<UseNavigation<"Home">>();
   const [region, setRegion] = useState<Region>({
     latitude: 0,
     longitude: 0,
@@ -29,6 +28,9 @@ export function MapScreen() {
     longitudeDelta: 0.005,
   });
   const [renderReady, setRenderReady] = useState(false);
+
+  const { navigate } = useNavigation<UseNavigation<"Map">>();
+
 
   const markerData: MarkerItem[] = [
     // The one below is in the building, could be the only one made clickable
@@ -124,10 +126,8 @@ export function MapScreen() {
       </MapView>
       <View style={styles.buttonContainer}>
         <Button
-          title="Button"
-          onPress={() => {
-            console.log("Map Button press");
-          }}
+          title="To main screen"
+          onPress={() => navigate("Home")}
         />
       </View>
     </View>
