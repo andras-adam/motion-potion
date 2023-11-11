@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import * as Location from "expo-location";
 import { LocationObjectCoords } from "expo-location";
 import { night_style } from "../../mapstyles/night_style";
+import { useIngredients } from "../../contexts/IngredientContext";
 
 type MarkerItem = {
   coord: LatLng;
@@ -33,7 +34,14 @@ export function MapScreen() {
 
   const { navigate } = useNavigation<UseNavigation<"Map">>();
 
-  const checkProximityAndTogglePopup = (markerCoord: LatLng, marker: string) => {
+  const ingredients = useIngredients();
+
+  const potUnlocked = new Set(ingredients.collected).size == 2;
+
+  const checkProximityAndTogglePopup = (
+    markerCoord: LatLng,
+    marker: string
+  ) => {
     if (location) {
       const distance = getDistance(
         { latitude: location.latitude, longitude: location.longitude },
@@ -45,11 +53,10 @@ export function MapScreen() {
         setIsTooFarPopupVisible(false);
         if (marker === "pumpkin") {
           navigate("SpellStepOne");
-        }
-        else if (marker === "chili") {
-          navigate("SpiceSpellStepOne")
-        }
-        else if (marker === "pot") { //TODO: Add zod logic here
+        } else if (marker === "chili") {
+          navigate("SpiceSpellStepOne");
+        } else if (marker === "pot") {
+          //TODO: Add zod logic here
           //navigate("???")
         }
       } else {
@@ -69,9 +76,9 @@ export function MapScreen() {
     const a =
       Math.sin(delta_phi / 2) * Math.sin(delta_phi / 2) +
       Math.cos(toRad_1) *
-      Math.cos(toRad_2) *
-      Math.sin(delta_long / 2) *
-      Math.sin(delta_long / 2);
+        Math.cos(toRad_2) *
+        Math.sin(delta_long / 2) *
+        Math.sin(delta_long / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
   }
@@ -111,10 +118,10 @@ export function MapScreen() {
     },
   ];
 
-  const [ granted, setGranted ] = useState(false)
+  const [granted, setGranted] = useState(false);
 
   useEffect(() => {
-    if (!granted) return
+    if (!granted) return;
     (async () => {
       let location = await Location.getLastKnownPositionAsync();
       if (!location) {
@@ -130,12 +137,12 @@ export function MapScreen() {
       setLocation(coords);
       setRenderReady(true);
     })();
-  }, [ granted ]);
+  }, [granted]);
 
   let [location, setLocation] = useState<LocationObjectCoords | undefined>();
 
   useEffect(() => {
-    if (!granted) return
+    if (!granted) return;
     Location.watchPositionAsync(
       {
         accuracy: 5,
@@ -147,14 +154,14 @@ export function MapScreen() {
         setLocation(loc.coords);
       }
     );
-  }, [ granted ]);
+  }, [granted]);
 
   useEffect(() => {
     (async () => {
-      const response = await Location.requestForegroundPermissionsAsync()
-      setGranted(response.granted)
-    })()
-  }, [])
+      const response = await Location.requestForegroundPermissionsAsync();
+      setGranted(response.granted);
+    })();
+  }, []);
 
   if (!renderReady) {
     return <View style={styles.screen}></View>;
@@ -175,30 +182,47 @@ export function MapScreen() {
           coordinate={{ latitude: 60.162, longitude: 24.9052 }}
           image={require("../../../assets/Pumpkin-Map.png")}
           onPress={() =>
-            checkProximityAndTogglePopup({
-              latitude: 60.162,
-              longitude: 24.9052,
-            }, "pumpkin")
+            checkProximityAndTogglePopup(
+              {
+                latitude: 60.162,
+                longitude: 24.9052,
+              },
+              "pumpkin"
+            )
           }
         />
         <Marker
           coordinate={{ latitude: 60.16215, longitude: 24.906 }}
-          image={require("../../../assets/Pot-Map.png")}
-          onPress={() =>
-            checkProximityAndTogglePopup({
-              latitude: 60.16215,
-              longitude: 24.906,
-            }, "pot")
+          image={
+            potUnlocked
+              ? require("../../../assets/Pot-Map.png")
+              : require("../../../assets/Pot-Map-locked.png")
           }
+          onPress={() => {
+            if (potUnlocked) {
+              checkProximityAndTogglePopup(
+                {
+                  latitude: 60.16215,
+                  longitude: 24.906,
+                },
+                "pot"
+              );
+            } else {
+              // Rafał todo modal
+            }
+          }}
         />
         <Marker
           coordinate={{ latitude: 60.1619, longitude: 24.9045 }}
           image={require("../../../assets/Chili-Map.png")}
           onPress={() =>
-            checkProximityAndTogglePopup({
-              latitude: 60.1619,
-              longitude: 24.9045,
-            }, "chili")
+            checkProximityAndTogglePopup(
+              {
+                latitude: 60.1619,
+                longitude: 24.9045,
+              },
+              "chili"
+            )
           }
         />
         {markerData.map((item, idx) => (
