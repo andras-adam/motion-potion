@@ -31,6 +31,7 @@ export function MapScreen() {
   });
   const [renderReady, setRenderReady] = useState(false);
   const [isTooFarPopupVisible, setIsTooFarPopupVisible] = useState(false);
+  const [ingredientsFullModal, setingredientsFullModal] = useState(false);
 
   const { navigate } = useNavigation<UseNavigation<"Map">>();
 
@@ -56,7 +57,6 @@ export function MapScreen() {
         } else if (marker === "chili") {
           navigate("SpiceSpellStepOne");
         } else if (marker === "pot") {
-          //TODO: Add zod logic here
           navigate("PotStepOne");
         }
       } else {
@@ -76,9 +76,9 @@ export function MapScreen() {
     const a =
       Math.sin(delta_phi / 2) * Math.sin(delta_phi / 2) +
       Math.cos(toRad_1) *
-        Math.cos(toRad_2) *
-        Math.sin(delta_long / 2) *
-        Math.sin(delta_long / 2);
+      Math.cos(toRad_2) *
+      Math.sin(delta_long / 2) *
+      Math.sin(delta_long / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
   }
@@ -208,10 +208,11 @@ export function MapScreen() {
                 "pot"
               );
             } else {
-              // Rafał todo modal
+              setingredientsFullModal(true)
             }
           }}
         />
+
         <Marker
           coordinate={{ latitude: 60.1619, longitude: 24.9045 }}
           image={require("../../../assets/Chili-Map.png")}
@@ -241,6 +242,26 @@ export function MapScreen() {
             <View style={styles.modalButtonsContainer}>
               <Pressable
                 onPress={() => setIsTooFarPopupVisible(false)}
+                style={styles.modalButton}
+              >
+                <Text style={styles.modalButtonText}> Close</Text>
+              </Pressable>
+            </View>
+          </View>
+        </Modal>
+      )}
+      {ingredientsFullModal && (
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={ingredientsFullModal}
+          onRequestClose={() => setingredientsFullModal(false)}
+        >
+          <View style={styles.popupContainer}>
+            <Text style={styles.modalText}>Gather at least 2 ingredients first!</Text>
+            <View style={styles.modalButtonsContainer}>
+              <Pressable
+                onPress={() => setingredientsFullModal(false)}
                 style={styles.modalButton}
               >
                 <Text style={styles.modalButtonText}> Close</Text>
