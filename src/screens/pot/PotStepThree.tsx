@@ -9,7 +9,7 @@ export function PotStepThree() {
     <ImageScreen
       action={() => navigate('Map')}
       onPressBack={() => navigate('Map')}
-      source={require('../../../assets/spell/pot_step_3.png')}
+      source={require('../../../assets/pot/pot_step_3.png')}
     />
   )
 }

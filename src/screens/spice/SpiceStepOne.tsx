@@ -10,7 +10,7 @@ export function SpiceStepOne() {
     <ImageScreen
       action={() => navigate('SpiceSpellStepTwo')}
       onPressBack={() => navigate('Map')}
-      source={require('../../../assets/spell/spice_spell_step_1.png')}
+      source={require('../../../assets/spice_spell_step_1.png')}
     />
   )
 }

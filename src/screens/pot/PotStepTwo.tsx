@@ -78,7 +78,7 @@ export function PotStepTwo() {
   return (
     <ImageScreen
       onPressBack={() => navigate('Map')}
-      source={require('../../../assets/spell/pot_step_2.png')}
+      source={require('../../../assets/pot/pot_step_2.png')}
     />
   )
 }

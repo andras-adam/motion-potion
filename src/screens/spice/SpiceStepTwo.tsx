@@ -78,7 +78,7 @@ export function SpiceStepTwo() {
   return (
     <ImageScreen
       onPressBack={() => navigate('Map')}
-      source={require('../../../assets/spell/spice_spell_step_2.png')}
+      source={require('../../../assets/spice_spell_step_2.png')}
     />
   )
 }
