@@ -44,7 +44,7 @@ export function MapScreen() {
         { latitude: location.latitude, longitude: location.longitude },
         markerCoord
       );
-      const threshold = 2000;
+      const threshold = 20;
 
       if (distance <= threshold) {
         setIsProximityPopupVisible(true);
@@ -154,6 +154,9 @@ export function MapScreen() {
         initialRegion={region}
         showsUserLocation={true}
         customMapStyle={night_style}
+        showsCompass={false}
+        toolbarEnabled={false}
+        showsMyLocationButton={false}
       >
         <Marker
           coordinate={{ latitude: 60.162, longitude: 24.9052 }}
@@ -190,59 +193,68 @@ export function MapScreen() {
         ))}
       </MapView>
 
-      {isProximityPopupVisible && (
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={isProximityPopupVisible}
-          onRequestClose={() => setIsProximityPopupVisible(false)}
-        >
-          <View style={styles.popupContainer}>
-            <Text style={styles.modalText}>You are close to the marker!</Text>
-            <View style={styles.modalButtonsContainer}>
-              <Pressable
-                onPress={() => navigate("SpellCast")}
-                style={styles.modalButton}
-              >
-                <Text style={styles.modalButtonText}>Collect</Text>
-              </Pressable>
-              <Pressable
-                onPress={() => setIsProximityPopupVisible(false)}
-                style={styles.modalButton}
-              >
-                <Text style={styles.modalButtonText}> Close</Text>
-              </Pressable>
+      {
+        isProximityPopupVisible && (
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={isProximityPopupVisible}
+            onRequestClose={() => setIsProximityPopupVisible(false)}
+          >
+            <View style={styles.popupContainer}>
+              <Text style={styles.modalText}>You are close to the marker!</Text>
+              <View style={styles.modalButtonsContainer}>
+                <Pressable
+                  onPress={() => navigate("SpellStepOne")}
+                  style={styles.modalButton}
+                >
+                  <Text style={styles.modalButtonText}>Collect</Text>
+                </Pressable>
+                <Pressable
+                  onPress={() => setIsProximityPopupVisible(false)}
+                  style={styles.modalButton}
+                >
+                  <Text style={styles.modalButtonText}> Close</Text>
+                </Pressable>
+              </View>
             </View>
-          </View>
-        </Modal>
-      )}
-      {isTooFarPopupVisible && (
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={isTooFarPopupVisible}
-          onRequestClose={() => setIsTooFarPopupVisible(false)}
-        >
-          <View style={styles.popupContainer}>
-            <Text style={styles.modalText}>You're too far away!</Text>
-            <View style={styles.modalButtonsContainer}>
-              <Pressable
-                onPress={() => setIsTooFarPopupVisible(false)}
-                style={styles.modalButton}
-              >
-                <Text style={styles.modalButtonText}> Close</Text>
-              </Pressable>
+          </Modal>
+        )
+      }
+      {
+        isTooFarPopupVisible && (
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={isTooFarPopupVisible}
+            onRequestClose={() => setIsTooFarPopupVisible(false)}
+          >
+            <View style={styles.popupContainer}>
+              <Text style={styles.modalText}>You're too far away!</Text>
+              <View style={styles.modalButtonsContainer}>
+                <Pressable
+                  onPress={() => setIsTooFarPopupVisible(false)}
+                  style={styles.modalButton}
+                >
+                  <Text style={styles.modalButtonText}> Close</Text>
+                </Pressable>
+              </View>
             </View>
-          </View>
-        </Modal>
-      )}
+          </Modal>
+        )
+      }
       <TouchableHighlight
         style={styles.buttonContainer}
         onPress={() => navigate("Home")}
       >
         <Image source={require("../../../assets/Icon-Left.png")} />
       </TouchableHighlight>
-    </View>
+      <View style={styles.menuContainer}>
+        <Image source={require("../../../assets/Quest-Map.png")} />
+        <Image source={require("../../../assets/BackPack-Map.png")} />
+        <Image source={require("../../../assets/Wizard-Map.png")} />
+      </View>
+    </View >
   );
 }
 
@@ -298,4 +310,14 @@ const styles = StyleSheet.create({
     letterSpacing: 0.25,
     color: "white",
   },
+  menuContainer: {
+    position: "absolute",
+    bottom: "5%",
+    alignSelf: "center",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    backgroundColor: "#120733",
+    opacity: 0.8,
+    width: "100%",
+  }
 });
