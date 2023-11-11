@@ -39,11 +39,11 @@ export function MapScreen() {
         { latitude: location.latitude, longitude: location.longitude },
         markerCoord
       );
-      const threshold = 200;
+      const threshold = 800;
 
       if (distance <= threshold) {
         setIsTooFarPopupVisible(false);
-        navigate("SpellStepOne")
+        navigate("SpellStepOne");
       } else {
         setIsTooFarPopupVisible(true);
       }
@@ -213,9 +213,15 @@ export function MapScreen() {
         <Image source={require("../../../assets/Icon-Left.png")} />
       </TouchableHighlight>
       <View style={styles.menuContainer}>
-        <TouchableHighlight onPress={() => console.log("Bruh1")}><Image source={require("../../../assets/Quest-Map.png")} /></TouchableHighlight>
-        <TouchableHighlight onPress={() => console.log("Bruh2")}><Image source={require("../../../assets/BackPack-Map.png")} /></TouchableHighlight>
-        <TouchableHighlight onPress={() => console.log("Bruh3")}><Image source={require("../../../assets/Wizard-Map.png")} /></TouchableHighlight>
+        <TouchableHighlight onPress={() => console.log("Bruh1")}>
+          <Image source={require("../../../assets/Quest-Map.png")} />
+        </TouchableHighlight>
+        <TouchableHighlight onPress={() => console.log("Bruh2")}>
+          <Image source={require("../../../assets/BackPack-Map.png")} />
+        </TouchableHighlight>
+        <TouchableHighlight onPress={() => console.log("Bruh3")}>
+          <Image source={require("../../../assets/Wizard-Map.png")} />
+        </TouchableHighlight>
       </View>
     </View>
   );
