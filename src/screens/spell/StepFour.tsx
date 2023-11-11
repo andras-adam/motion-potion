@@ -33,7 +33,7 @@ export function StepFour() {
         motionData.current.shift();
       }
     }
-    if (i.current % 20 == 0) {
+    if (i.current % 10 == 0) {
       i.current = 0;
       let res = detect_figure(motionData.current);
       for (const movement of res) {
