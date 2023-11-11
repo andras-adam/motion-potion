@@ -1,5 +1,7 @@
 # Motion Potion
 
+Project developed at the Junction 2023 hackathon for Huawei's challenge.
+
 ## Usage
 
 ### Android
