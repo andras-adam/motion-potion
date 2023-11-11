@@ -75,6 +75,11 @@ export default function App() {
                   <Stack.Screen name="Items" component={ItemsScreen} />
                   <Stack.Screen name="Profile" component={ProfileScreen} />
                 </Stack.Group>
+                <Stack.Group screenOptions={{ headerShown: false }}>
+                  <Stack.Screen name="PotStepOne" component={PotStepOne} />
+                  <Stack.Screen name="PotStepTwo" component={PotStepTwo} />
+                  <Stack.Screen name="PotStepThree" component={PotStepThree} />
+                </Stack.Group>
               </Stack.Navigator>
               <StatusBar style="auto" />
             </NavigationContainer>
