@@ -226,7 +226,8 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     position: "absolute",
-    top: "10%",
+    left: "2%",
+    top: "7%",
     alignSelf: "flex-start",
   },
   popupContainer: {
