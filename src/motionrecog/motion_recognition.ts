@@ -21,10 +21,14 @@ export type InputDatum = {
   ax: number;
   ay: number;
   az: number;
-  dt: number;
+  timestamp: number;
 };
 
-type Position = InputDatum & {
+type Position = {
+  dt: number;
+  ax: number;
+  ay: number;
+  az: number;
   vx: number;
   vy: number;
   vz: number;
@@ -33,11 +37,18 @@ type Position = InputDatum & {
   z: number;
 };
 
-export function detect_figure(time_series: InputDatum[]): Figure {
+// TMP Ret type
+export function detect_figure(time_series: InputDatum[]): Position[] {
+  console.log("HERE!");
   let positions = track_position(time_series);
+  // console.log(positions);
+  // let motion_periods = get_motion_periods(positions);
 
-  let motion_periods = get_motion_periods(positions);
-  return 0;
+  // for (const mp of motion_periods) {
+  //   let classification = classify_motion_period(mp);
+  //   console.log(classification);
+  // }
+  return positions;
 }
 
 function classify_motion_period(motion_period: Position[]): Movement {
@@ -211,6 +222,9 @@ function get_motion_periods(positions: Position[]): Position[][] {
 }
 
 function track_position(time_series: InputDatum[]): Position[] {
+  if (time_series.length <= 1) {
+    return [];
+  }
   let vx = 0;
   let vy = 0;
   let vz = 0;
@@ -218,13 +232,25 @@ function track_position(time_series: InputDatum[]): Position[] {
   let y = 0;
   let z = 0;
 
+  let previous_t = time_series[0].timestamp;
   let positions = [];
+  let skipfirst = true;
   for (const ts of time_series) {
-    const dt = ts.dt;
-    vx += ts.ax * dt;
-    vy += ts.ay * dt;
-    vz += ts.az * dt;
-
+    if (skipfirst) {
+      skipfirst = false;
+      continue;
+    }
+    const dt = (ts.timestamp - previous_t) / 1000000000;
+    previous_t = ts.timestamp;
+    if (l2(ts.ax, ts.ay, ts.az) < 0.1) {
+      vx = 0;
+      vy = 0;
+      vz = 0;
+    } else {
+      vx += ts.ax * dt;
+      vy += ts.ay * dt;
+      vz += ts.az * dt;
+    }
     x += vx * dt;
     y += vy * dt;
     z += vz * dt;
