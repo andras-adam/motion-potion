@@ -1,4 +1,4 @@
-import { Image, StyleSheet, View } from "react-native";
+import { Image, StyleSheet, TouchableWithoutFeedback, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { UseNavigation } from "../../types/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -78,6 +78,14 @@ export function StepTwo() {
   return (
     <View style={styles.screen}>
       {/* Fullscreen image */}
+      <View style={styles.returnAbs}>
+        <TouchableWithoutFeedback
+          onPress={() => navigate('Map')}
+          style={styles.touchable}
+        >
+          <View style={styles.touchableContent}></View>
+        </TouchableWithoutFeedback>
+      </View>
 
       <Image
         source={require("../../../assets/spell/spell_step_2.png")}
@@ -97,5 +105,20 @@ const styles = StyleSheet.create({
     objectFit: "cover",
     width: "100%",
     height: "100%",
+  },
+  returnAbs: {
+    position: "absolute",
+    top: 32,
+    left: 0,
+    right: 350,
+    height: 96,
+    zIndex: 100,
+    alignSelf: "flex-start",
+  },
+  touchable: {
+    flex: 1
+  },
+  touchableContent: {
+    flex: 1
   },
 });
