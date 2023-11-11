@@ -122,14 +122,14 @@ export function MapScreen() {
           />
         )}
       </MapView>
-      <TouchableOpacity style={styles.buttonContainer}>
+      <View style={styles.buttonContainer}>
         <Button
           title="Button"
           onPress={() => {
-            /* action here */
+            console.log("Map Button press");
           }}
         />
-      </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -139,13 +139,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   buttonContainer: {
-    position: "absolute",
-    top: 20,
-    left: 20,
-    borderRadius: 25,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "white", // or any other color
-    elevation: 3, // for Android shadow
+    position: 'absolute',
+    top: '10%',
+    alignSelf: 'flex-start'
   },
 });
