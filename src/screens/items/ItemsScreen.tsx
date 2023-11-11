@@ -10,13 +10,13 @@ export function ItemsScreen() {
 
   let image;
   if (inventory.length == 0) {
-    image = require("../../../assets/inventory/empty.png");
+    image = require("../../../assets/items/empty.png");
   } else if (inventory.length == 2) {
-    image = require("../../../assets/inventory/both.png");
+    image = require("../../../assets/items/both.png");
   } else if (inventory[0] == Ingredient.Chili) {
-    image = require("../../../assets/inventory/chilli.png");
+    image = require("../../../assets/items/chilli.png");
   } else if (inventory[0] == Ingredient.Pumpkin) {
-    image = require("../../../assets/inventory/pumpkin.png");
+    image = require("../../../assets/items/pumpkin.png");
   }
 
   return <ImageScreen onPressBack={goBack} source={image} />;
