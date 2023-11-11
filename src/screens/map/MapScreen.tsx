@@ -206,12 +206,6 @@ export function MapScreen() {
           </View>
         </Modal>
       )}
-      <TouchableHighlight
-        style={styles.buttonContainer}
-        onPress={() => navigate("Home")}
-      >
-        <Image source={require("../../../assets/Icon-Left.png")} />
-      </TouchableHighlight>
       <View style={styles.menuContainer}>
         <TouchableHighlight onPress={() => console.log("Bruh1")}>
           <Image source={require("../../../assets/Quest-Map.png")} />

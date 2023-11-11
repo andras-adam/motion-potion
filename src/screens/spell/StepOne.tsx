@@ -1,4 +1,4 @@
-import { Image, StyleSheet, TouchableWithoutFeedback, View } from 'react-native'
+import { Image, StyleSheet, TouchableHighlight, TouchableWithoutFeedback, View, Text } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { UseNavigation } from '../../types/navigation'
 
@@ -8,6 +8,15 @@ export function StepOne() {
 
   return (
     <View style={styles.screen}>
+
+      <View style={styles.returnAbs}>
+        <TouchableWithoutFeedback
+          onPress={() => navigate('Map')}
+          style={styles.touchable}
+        >
+          <View style={styles.touchableContent}></View>
+        </TouchableWithoutFeedback>
+      </View>
 
       {/* Touchable hitbox for the image button */}
 
@@ -57,5 +66,14 @@ const styles = StyleSheet.create({
     objectFit: 'cover',
     width: '100%',
     height: '100%'
+  },
+  returnAbs: {
+    position: "absolute",
+    top: 32,
+    left: 0,
+    right: 350,
+    height: 96,
+    zIndex: 100,
+    alignSelf: "flex-start",
   }
 })
