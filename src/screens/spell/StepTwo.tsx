@@ -1,20 +1,10 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import {
-  Image,
-  StyleSheet,
-  TouchableWithoutFeedback,
-  View,
-} from "react-native";
-import {
-  InputDatum,
-  Movement,
-  detect_figure,
-} from "../../motionrecog/motion_recognition";
-import { DeviceMotion, DeviceMotionMeasurement } from "expo-sensors";
-import { UseNavigation } from "../../types/navigation";
-import { useNavigation } from "@react-navigation/native";
-import Deque from "double-ended-queue";
-import { Subscription } from "expo-sensors/build/Pedometer";
+import { Image, StyleSheet, TouchableWithoutFeedback, View } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
+import { UseNavigation } from '../../types/navigation'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { detect_figure, InputDatum, Movement } from '../../motionrecog/motion_recognition'
+import { Subscription } from 'expo-sensors/build/Pedometer'
+import { DeviceMotion, DeviceMotionMeasurement } from 'expo-sensors'
 
 export function StepTwo() {
   const { navigate } = useNavigation<UseNavigation<"SpellStepTwo">>();
