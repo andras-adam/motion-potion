@@ -28,10 +28,9 @@ export function OtherScreen() {
     }
     if (motionData.current.length % 20 == 0) {
       let res = detect_figure(motionData.current).map((pos) => ({
-        x: pos.ax / 10 + 0.5,
-        y: pos.ay / 10 + 0.5,
+        x: pos.ax / 8 + 0.5,
+        y: -pos.ay / 8 + 0.5,
       }));
-      console.log(res[res.length - 1]);
       setEntries(res);
     }
   }, []);
