@@ -17,9 +17,9 @@ import { StepFour } from "./screens/spell/StepFour";
 import { StepThree } from "./screens/spell/StepThree";
 import { StepTwo } from "./screens/spell/StepTwo";
 import { IngredientContextProvider } from './contexts/IngredientContext'
-import { SpiceStepOne } from './screens/spell spice/SpiceStepOne';
-import { SpiceStepTwo } from './screens/spell spice/SpiceStepTwo';
-import { SpiceStepThree } from './screens/spell spice/SpiceStepThree';
+import { SpiceStepOne } from './screens/spice/SpiceStepOne';
+import { SpiceStepTwo } from './screens/spice/SpiceStepTwo';
+import { SpiceStepThree } from './screens/spice/SpiceStepThree';
 import { QuestScreen } from './screens/quests/QuestsScreen'
 import { ItemsScreen } from './screens/items/ItemsScreen'
 import { ProfileScreen } from './screens/profile/ProfileScreen'
