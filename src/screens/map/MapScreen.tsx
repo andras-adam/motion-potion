@@ -53,11 +53,12 @@ export function MapScreen() {
         setIsTooFarPopupVisible(false);
         if (marker === "pumpkin") {
           navigate("SpellStepOne");
-        } else if (marker === "chili") {
-          navigate("SpiceSpellStepOne");
-        } else if (marker === "pot") {
-          //TODO: Add zod logic here
-          //navigate("???")
+        }
+        else if (marker === "chili") {
+          navigate("SpiceSpellStepOne")
+        }
+        else if (marker === "pot") { //TODO: Add zod logic here
+          navigate("PotStepOne")
         }
       } else {
         setIsTooFarPopupVisible(true);
@@ -76,9 +77,9 @@ export function MapScreen() {
     const a =
       Math.sin(delta_phi / 2) * Math.sin(delta_phi / 2) +
       Math.cos(toRad_1) *
-        Math.cos(toRad_2) *
-        Math.sin(delta_long / 2) *
-        Math.sin(delta_long / 2);
+      Math.cos(toRad_2) *
+      Math.sin(delta_long / 2) *
+      Math.sin(delta_long / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
   }
@@ -118,7 +119,7 @@ export function MapScreen() {
     },
   ];
 
-  const [granted, setGranted] = useState(false);
+  const [granted, setGranted] = useState(false)
 
   useEffect(() => {
     if (!granted) return;
@@ -138,130 +139,132 @@ export function MapScreen() {
       setRenderReady(true);
     })();
   }, [granted]);
+}, [granted]);
 
-  let [location, setLocation] = useState<LocationObjectCoords | undefined>();
+let [location, setLocation] = useState<LocationObjectCoords | undefined>();
 
-  useEffect(() => {
-    if (!granted) return;
-    Location.watchPositionAsync(
-      {
-        accuracy: 5,
-        mayShowUserSettingsDialog: true,
-        timeInterval: 300,
-        distanceInterval: 5,
-      },
-      (loc) => {
-        setLocation(loc.coords);
-      }
-    );
+useEffect(() => {
+  if (!granted) return;
+  Location.watchPositionAsync(
+    {
+      accuracy: 5,
+      mayShowUserSettingsDialog: true,
+      timeInterval: 300,
+      distanceInterval: 5,
+    },
+    (loc) => {
+      setLocation(loc.coords);
+    }
+  );
+}, [granted]);
   }, [granted]);
 
-  useEffect(() => {
-    (async () => {
-      const response = await Location.requestForegroundPermissionsAsync();
-      setGranted(response.granted);
-    })();
-  }, []);
+useEffect(() => {
+  (async () => {
+    const response = await Location.requestForegroundPermissionsAsync();
+    setGranted(response.granted);
+  })();
+}, []);
 
-  if (!renderReady) {
-    return <View style={styles.screen}></View>;
-  }
+if (!renderReady) {
+  return <View style={styles.screen}></View>;
+}
 
-  return (
-    <View style={styles.screen}>
-      <MapView
-        style={{ flex: 1 }}
-        initialRegion={region}
-        showsUserLocation={true}
-        customMapStyle={night_style}
-        showsCompass={false}
-        toolbarEnabled={false}
-        showsMyLocationButton={false}
+return (
+  <View style={styles.screen}>
+    <MapView
+      style={{ flex: 1 }}
+      initialRegion={region}
+      showsUserLocation={true}
+      customMapStyle={night_style}
+      showsCompass={false}
+      toolbarEnabled={false}
+      showsMyLocationButton={false}
+    >
+      <Marker
+        coordinate={{ latitude: 60.162, longitude: 24.9052 }}
+        image={require("../../../assets/Pumpkin-Map.png")}
+        onPress={() =>
+          checkProximityAndTogglePopup(
+            {
+              latitude: 60.162,
+              longitude: 24.9052,
+            },
+            "pumpkin"
+          )
+        }
+      />
+      <Marker
+        coordinate={{ latitude: 60.16215, longitude: 24.906 }}
+        image={
+          potUnlocked
+            ? require("../../../assets/Pot-Map.png")
+            : require("../../../assets/Pot-Map-locked.png")
+        }
+        onPress={() => {
+          if (potUnlocked) {
+            checkProximityAndTogglePopup(
+              {
+                latitude: 60.16215,
+                longitude: 24.906,
+              },
+              "pot"
+            );
+          } else {
+            // Rafał todo modal
+          }
+        }}
+      />
+      <Marker
+        coordinate={{ latitude: 60.1619, longitude: 24.9045 }}
+        image={require("../../../assets/Chili-Map.png")}
+        onPress={() =>
+          checkProximityAndTogglePopup(
+            {
+              latitude: 60.1619,
+              longitude: 24.9045,
+            },
+            "chili"
+          )
+        }
+      />
+      {markerData.map((item, idx) => (
+        <Marker key={idx} coordinate={item.coord} image={item.asset} />
+      ))}
+    </MapView>
+    {isTooFarPopupVisible && (
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={isTooFarPopupVisible}
+        onRequestClose={() => setIsTooFarPopupVisible(false)}
       >
-        <Marker
-          coordinate={{ latitude: 60.162, longitude: 24.9052 }}
-          image={require("../../../assets/Pumpkin-Map.png")}
-          onPress={() =>
-            checkProximityAndTogglePopup(
-              {
-                latitude: 60.162,
-                longitude: 24.9052,
-              },
-              "pumpkin"
-            )
-          }
-        />
-        <Marker
-          coordinate={{ latitude: 60.16215, longitude: 24.906 }}
-          image={
-            potUnlocked
-              ? require("../../../assets/Pot-Map.png")
-              : require("../../../assets/Pot-Map-locked.png")
-          }
-          onPress={() => {
-            if (potUnlocked) {
-              checkProximityAndTogglePopup(
-                {
-                  latitude: 60.16215,
-                  longitude: 24.906,
-                },
-                "pot"
-              );
-            } else {
-              // Rafał todo modal
-            }
-          }}
-        />
-        <Marker
-          coordinate={{ latitude: 60.1619, longitude: 24.9045 }}
-          image={require("../../../assets/Chili-Map.png")}
-          onPress={() =>
-            checkProximityAndTogglePopup(
-              {
-                latitude: 60.1619,
-                longitude: 24.9045,
-              },
-              "chili"
-            )
-          }
-        />
-        {markerData.map((item, idx) => (
-          <Marker key={idx} coordinate={item.coord} image={item.asset} />
-        ))}
-      </MapView>
-      {isTooFarPopupVisible && (
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={isTooFarPopupVisible}
-          onRequestClose={() => setIsTooFarPopupVisible(false)}
-        >
-          <View style={styles.popupContainer}>
-            <Text style={styles.modalText}>You're too far away!</Text>
-            <View style={styles.modalButtonsContainer}>
-              <Pressable
-                onPress={() => setIsTooFarPopupVisible(false)}
-                style={styles.modalButton}
-              >
-                <Text style={styles.modalButtonText}> Close</Text>
-              </Pressable>
-            </View>
+        <View style={styles.popupContainer}>
+          <Text style={styles.modalText}>You're too far away!</Text>
+          <View style={styles.modalButtonsContainer}>
+            <Pressable
+              onPress={() => setIsTooFarPopupVisible(false)}
+              style={styles.modalButton}
+            >
+              <Text style={styles.modalButtonText}> Close</Text>
+            </Pressable>
           </View>
-        </Modal>
-      )}
-      <View style={styles.menuContainer}>
-        <TouchableHighlight onPress={() => navigate('Quests')}>
-          <Image source={require("../../../assets/Quest-Map.png")} />
-        </TouchableHighlight>
-        <TouchableHighlight onPress={() => navigate('Items')}>
-          <Image source={require("../../../assets/BackPack-Map.png")} />
-        </TouchableHighlight>
-        <TouchableHighlight onPress={() => navigate('Profile')}>
-          <Image source={require("../../../assets/Wizard-Map.png")} />
-        </TouchableHighlight>
-      </View>
+        </View>
+      </Modal>
+    )}
+    <View style={styles.menuContainer}>
+      <TouchableHighlight onPress={() => console.log("Bruh1")}>
+        <Image source={require("../../../assets/Quest-Map.png")} />
+      </TouchableHighlight>
+      <TouchableHighlight onPress={() => console.log("Bruh2")}>
+        <Image source={require("../../../assets/BackPack-Map.png")} />
+      </TouchableHighlight>
+      <TouchableHighlight onPress={() => console.log("Bruh3")}>
+        <Image source={require("../../../assets/Wizard-Map.png")} />
+      </TouchableHighlight>
     </View>
-  );
+  </View>
+);
 }
 
 const styles = StyleSheet.create({

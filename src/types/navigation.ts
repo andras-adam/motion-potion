@@ -21,6 +21,9 @@ export type NavigatorParamList = {
   // Other
   Home: undefined
   Debug: undefined
+  PotStepOne: undefined
+  PotStepTwo: undefined
+  PotStepThree: undefined
 }
 
 // Helper type for useNavigation() hooks
