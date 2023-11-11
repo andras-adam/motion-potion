@@ -58,14 +58,17 @@ export default function App() {
                   <Stack.Screen name="SpellStepThree" component={StepThree} />
                   <Stack.Screen name="SpellStepFour" component={StepFour} />
                   <Stack.Screen name="SpellStepFive" component={StepFive} />
+                  <Stack.Screen name="SpiceSpellStepOne" component={SpiceStepOne} />
+                  <Stack.Screen name="SpiceSpellStepTwo" component={SpiceStepTwo} />
+                  <Stack.Screen name="SpiceSpellStepThree" component={SpiceStepThree} />
                 </Stack.Group>
               </Stack.Navigator>
               <StatusBar style="auto" />
             </NavigationContainer>
           </IngredientContextProvider>
-        </GestureHandlerRootView>
-      </SafeAreaProvider>
-    </Suspense>
+        </GestureHandlerRootView >
+      </SafeAreaProvider >
+    </Suspense >
   );
 }
 
