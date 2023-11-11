@@ -6,6 +6,9 @@ import {
   TouchableNativeFeedback,
   View,
   Modal,
+  Image,
+  TouchableHighlight,
+  Pressable,
 } from "react-native";
 import { UseNavigation } from "../../types/navigation";
 import MapView, { LatLng, Marker, Region } from "react-native-maps";
@@ -15,6 +18,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useEffect, useMemo, useState } from "react";
 import * as Location from "expo-location";
 import { LocationObjectCoords } from "expo-location";
+import { night_style } from "../../mapstyles/night_style";
 
 type MarkerItem = {
   coord: LatLng;
@@ -42,7 +46,7 @@ export function MapScreen() {
         { latitude: location.latitude, longitude: location.longitude },
         markerCoord
       );
-      const threshold = 100;
+      const threshold = 20;
 
       if (distance <= threshold) {
         setIsProximityPopupVisible(true);
@@ -61,11 +65,11 @@ export function MapScreen() {
     const phi_1 = toRad(coord1.latitude);
     const phi_2 = toRad(coord2.latitude);
     const delta_phi = toRad(coord2.latitude - coord1.latitude);
-    const Δ_long = toRad(coord2.longitude - coord1.longitude);
+    const delta_long = toRad(coord2.longitude - coord1.longitude);
 
     const a =
       Math.sin(delta_phi / 2) * Math.sin(delta_phi / 2) +
-      Math.cos(phi_1) * Math.cos(phi_2) * Math.sin(Δ_long / 2) * Math.sin(Δ_long / 2);
+      Math.cos(phi_1) * Math.cos(phi_2) * Math.sin(delta_long / 2) * Math.sin(delta_long / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
   }
@@ -146,7 +150,7 @@ export function MapScreen() {
 
   return (
     <View style={styles.screen}>
-      <MapView style={{ flex: 1 }} initialRegion={region} showsUserLocation={true}>
+      <MapView style={{ flex: 1 }} initialRegion={region} showsUserLocation={true} customMapStyle={night_style}>
         <Marker coordinate={{ latitude: 60.16200, longitude: 24.9052 }} image={require("../../../assets/Pumpkin-Map.png")} onPress={() => checkProximityAndTogglePopup({ latitude: 60.16200, longitude: 24.9052 })} />
         <Marker coordinate={{ latitude: 60.16215, longitude: 24.9060 }} image={require("../../../assets/Pot-Map.png")} onPress={() => checkProximityAndTogglePopup({ latitude: 60.16215, longitude: 24.9060 })} />
         <Marker coordinate={{ latitude: 60.16190, longitude: 24.9045 }} image={require("../../../assets/Chili-Map.png")} onPress={() => checkProximityAndTogglePopup({ latitude: 60.16190, longitude: 24.9045 })} />
@@ -163,9 +167,11 @@ export function MapScreen() {
           onRequestClose={() => setIsProximityPopupVisible(false)}
         >
           <View style={styles.popupContainer}>
-            <Text>You are close to the marker!</Text>
-            <Button title="Collect" onPress={() => navigate("Cast")} />
-            <Button title="Close" onPress={() => setIsProximityPopupVisible(false)} />
+            <Text style={styles.modalText}>You are close to the marker!</Text>
+            <View style={styles.modalButtonsContainer}>
+              <Pressable onPress={() => navigate("Cast")} style={styles.modalButton}><Text style={styles.modalButtonText}>Collect</Text></Pressable >
+              <Pressable onPress={() => setIsProximityPopupVisible(false)} style={styles.modalButton}><Text style={styles.modalButtonText}> Close</Text></Pressable >
+            </View>
           </View>
         </Modal>
       )}
@@ -177,17 +183,17 @@ export function MapScreen() {
           onRequestClose={() => setIsTooFarPopupVisible(false)}
         >
           <View style={styles.popupContainer}>
-            <Text>You're too far away!</Text>
-            <Button title="Close" onPress={() => setIsTooFarPopupVisible(false)} />
+            <Text style={styles.modalText}>You're too far away!</Text>
+            <View style={styles.modalButtonsContainer}>
+              <Pressable onPress={() => setIsTooFarPopupVisible(false)} style={styles.modalButton}><Text style={styles.modalButtonText}> Close</Text></Pressable >
+            </View>
           </View>
         </Modal>
       )}
-      <View style={styles.buttonContainer}>
-        <Button
-          title="To main screen"
-          onPress={() => navigate("Home")}
-        />
-      </View>
+      <TouchableHighlight style={styles.buttonContainer} onPress={() => navigate("Home")}>
+        <Image source={require("../../../assets/Icon-Left.png")} />
+      </TouchableHighlight >
+
     </View>
   );
 }
@@ -199,11 +205,11 @@ const styles = StyleSheet.create({
   buttonContainer: {
     position: 'absolute',
     top: '10%',
-    alignSelf: 'flex-start'
+    alignSelf: 'flex-start',
   },
   popupContainer: {
     margin: 20,
-    backgroundColor: "white",
+    backgroundColor: "#241c54",
     borderRadius: 20,
     padding: 35,
     alignItems: "center",
@@ -215,5 +221,35 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+  },
+  modalButton: {
+    backgroundColor: "#FF9051",
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    borderRadius: 4,
+    elevation: 3,
+  },
+  modalButtonsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginTop: 15,
+    width: "100%",
+  },
+  modalButtonText: {
+    fontSize: 16,
+    lineHeight: 21,
+    fontWeight: 'bold',
+    letterSpacing: 0.25,
+    color: 'white',
+  },
+  modalText: {
+    fontSize: 16,
+    lineHeight: 21,
+    letterSpacing: 0.25,
+    color: 'white',
   }
 });
+
+
