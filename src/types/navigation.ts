@@ -15,6 +15,12 @@ export type NavigatorParamList = {
   SpiceSpellStepOne: undefined
   SpiceSpellStepTwo: undefined
   SpiceSpellStepThree: undefined
+  PotStepOne: undefined
+  PotStepTwo: undefined
+  PotStepThree: undefined  
+
+
+  
 }
 
 // Helper type for useNavigation() hooks

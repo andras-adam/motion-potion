@@ -20,6 +20,9 @@ import { IngredientContextProvider } from './contexts/IngredientContext'
 import { SpiceStepOne } from './screens/spell spice/SpiceStepOne';
 import { SpiceStepTwo } from './screens/spell spice/SpiceStepTwo';
 import { SpiceStepThree } from './screens/spell spice/SpiceStepThree';
+import { PotStepOne } from './screens/pot/PotStepOne';
+import { PotStepTwo } from './screens/pot/PotStepTwo';
+import { PotStepThree } from './screens/pot/PotStepThree';
 
 // Create stack navigator
 const Stack = createNativeStackNavigator<NavigatorParamList>();
@@ -61,6 +64,9 @@ export default function App() {
                   <Stack.Screen name="SpiceSpellStepOne" component={SpiceStepOne} />
                   <Stack.Screen name="SpiceSpellStepTwo" component={SpiceStepTwo} />
                   <Stack.Screen name="SpiceSpellStepThree" component={SpiceStepThree} />
+                  <Stack.Screen name="PotStepOne" component={PotStepOne} />
+                  <Stack.Screen name="PotStepTwo" component={PotStepTwo} />
+                  <Stack.Screen name="PotStepThree" component={PotStepThree} />
                 </Stack.Group>
               </Stack.Navigator>
               <StatusBar style="auto" />

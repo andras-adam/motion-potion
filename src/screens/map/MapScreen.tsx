@@ -50,7 +50,7 @@ export function MapScreen() {
           navigate("SpiceSpellStepOne")
         }
         else if (marker === "pot") { //TODO: Add zod logic here
-          //navigate("???")
+          navigate("PotStepOne")
         }
       } else {
         setIsTooFarPopupVisible(true);
@@ -111,7 +111,7 @@ export function MapScreen() {
     },
   ];
 
-  const [ granted, setGranted ] = useState(false)
+  const [granted, setGranted] = useState(false)
 
   useEffect(() => {
     if (!granted) return
@@ -130,7 +130,7 @@ export function MapScreen() {
       setLocation(coords);
       setRenderReady(true);
     })();
-  }, [ granted ]);
+  }, [granted]);
 
   let [location, setLocation] = useState<LocationObjectCoords | undefined>();
 
@@ -147,7 +147,7 @@ export function MapScreen() {
         setLocation(loc.coords);
       }
     );
-  }, [ granted ]);
+  }, [granted]);
 
   useEffect(() => {
     (async () => {

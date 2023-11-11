@@ -1,17 +1,14 @@
-import {
-  Image,
-  StyleSheet,
-  TouchableWithoutFeedback,
-  View,
-} from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { UseNavigation } from "../../types/navigation";
+import { Image, StyleSheet, TouchableHighlight, TouchableWithoutFeedback, View, Text } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
+import { UseNavigation } from '../../types/navigation'
 
-export function StepFive() {
-  const { navigate } = useNavigation<UseNavigation<"SpellStepFive">>();
+
+export function PotStepOne() {
+  const { navigate } = useNavigation<UseNavigation<'PotStepOne'>>()
 
   return (
     <View style={styles.screen}>
+
       <View style={styles.returnAbs}>
         <TouchableWithoutFeedback
           onPress={() => navigate('Map')}
@@ -20,11 +17,12 @@ export function StepFive() {
           <View style={styles.touchableContent}></View>
         </TouchableWithoutFeedback>
       </View>
+
       {/* Touchable hitbox for the image button */}
 
       <View style={styles.absolute}>
         <TouchableWithoutFeedback
-          onPress={() => navigate("Map")}
+          onPress={() => navigate('PotStepTwo')}
           style={styles.touchable}
         >
           <View style={styles.touchableContent}></View>
@@ -34,39 +32,40 @@ export function StepFive() {
       {/* Fullscreen image */}
 
       <Image
-        source={require("../../../assets/spell/spell_step_5.png")}
+        source={require('../../../assets/pot/pot_step_1.png')}
         style={styles.image}
       />
+
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    position: "relative",
-    backgroundColor: "#000000",
+    position: 'relative',
+    backgroundColor: '#000000'
   },
   absolute: {
-    position: "absolute",
+    position: 'absolute',
     // borderColor: '#ff0000',
     // borderWidth: 2,
     bottom: 32,
     left: 16,
     right: 16,
     height: 96,
-    zIndex: 100,
+    zIndex: 100
   },
   touchable: {
-    flex: 1,
+    flex: 1
   },
   touchableContent: {
-    flex: 1,
+    flex: 1
   },
   image: {
-    objectFit: "cover",
-    width: "100%",
-    height: "100%",
+    objectFit: 'cover',
+    width: '100%',
+    height: '100%'
   },
   returnAbs: {
     position: "absolute",
@@ -76,5 +75,5 @@ const styles = StyleSheet.create({
     height: 96,
     zIndex: 100,
     alignSelf: "flex-start",
-  },
-});
+  }
+})
