@@ -9,7 +9,7 @@ import { DeviceMotion, DeviceMotionMeasurement } from 'expo-sensors'
 
 export function StepTwo() {
   const { navigate } = useNavigation<UseNavigation<"SpellStepTwo">>();
-  // @ts-ignore
+
   const motionData = useRef<InputDatum[]>([]);
   const i = useRef<number>(0);
 
