@@ -250,13 +250,13 @@ export function MapScreen() {
         </Modal>
       )}
       <View style={styles.menuContainer}>
-        <TouchableHighlight onPress={() => navigate('Quests')}>
+        <TouchableHighlight onPress={() => navigate("Quests")}>
           <Image source={require("../../../assets/Quest-Map.png")} />
         </TouchableHighlight>
-        <TouchableHighlight onPress={() => navigate('Items')}>
+        <TouchableHighlight onPress={() => navigate("Items")}>
           <Image source={require("../../../assets/BackPack-Map.png")} />
         </TouchableHighlight>
-        <TouchableHighlight onPress={() => navigate('Profile')}>
+        <TouchableHighlight onPress={() => navigate("Profile")}>
           <Image source={require("../../../assets/Wizard-Map.png")} />
         </TouchableHighlight>
       </View>
@@ -324,7 +324,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     backgroundColor: "#120733",
-    opacity: 0.8,
+    opacity: 1,
     width: "100%",
   },
 });
