@@ -17,6 +17,11 @@ export function HomeScreen() {
         title="To map screen"
         onPress={() => navigate("Map")}
       />
+      <Text>Spell screen</Text>
+      <Button
+        title="To spell screen"
+        onPress={() => navigate("Spell")}
+      />
     </View>
   );
 }
