@@ -15,12 +15,14 @@
       "**/*"
     ],
     "ios": {
+      "userInterfaceStyle": "dark",
       "supportsTablet": true,
       "infoPlist": {
         "NSMotionUsageDescription": "Allow Motion Potion to access your device motion."
       }
     },
     "android": {
+      "userInterfaceStyle": "dark",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -42,7 +44,7 @@
       "package": "com.andras.adam.motionpotion"
     },
     "androidNavigationBar": {
-      "backgroundColor": "#000000"
+      "barStyle": "dark-content"
     },
     "web": {
       "favicon": "./assets/favicon.png"
