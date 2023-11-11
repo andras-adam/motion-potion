@@ -16,6 +16,7 @@ import { StepFive } from "./screens/spell/StepFive";
 import { StepFour } from "./screens/spell/StepFour";
 import { StepThree } from "./screens/spell/StepThree";
 import { StepTwo } from "./screens/spell/StepTwo";
+import { IngredientContextProvider } from './contexts/IngredientContext'
 
 // Create stack navigator
 const Stack = createNativeStackNavigator<NavigatorParamList>();
@@ -38,25 +39,27 @@ export default function App() {
     >
       <SafeAreaProvider style={styles.wrapper}>
         <GestureHandlerRootView style={styles.wrapper}>
-          <NavigationContainer theme={DarkTheme}>
-            <Stack.Navigator initialRouteName="Map">
-              <Stack.Screen name="Home" component={HomeScreen} />
-              <Stack.Screen name="Debug" component={DebugScreen} />
-              <Stack.Screen
-                name="Map"
-                options={{ headerShown: false }}
-                component={MapScreen}
-              />
-              <Stack.Group screenOptions={{ headerShown: false }}>
-                <Stack.Screen name="SpellStepOne" component={StepOne} />
-                <Stack.Screen name="SpellStepTwo" component={StepTwo} />
-                <Stack.Screen name="SpellStepThree" component={StepThree} />
-                <Stack.Screen name="SpellStepFour" component={StepFour} />
-                <Stack.Screen name="SpellStepFive" component={StepFive} />
-              </Stack.Group>
-            </Stack.Navigator>
-            <StatusBar style="auto" />
-          </NavigationContainer>
+          <IngredientContextProvider>
+            <NavigationContainer theme={DarkTheme}>
+              <Stack.Navigator initialRouteName="Map">
+                <Stack.Screen name="Home" component={HomeScreen} />
+                <Stack.Screen name="Debug" component={DebugScreen} />
+                <Stack.Screen
+                  name="Map"
+                  options={{ headerShown: false }}
+                  component={MapScreen}
+                />
+                <Stack.Group screenOptions={{ headerShown: false }}>
+                  <Stack.Screen name="SpellStepOne" component={StepOne} />
+                  <Stack.Screen name="SpellStepTwo" component={StepTwo} />
+                  <Stack.Screen name="SpellStepThree" component={StepThree} />
+                  <Stack.Screen name="SpellStepFour" component={StepFour} />
+                  <Stack.Screen name="SpellStepFive" component={StepFive} />
+                </Stack.Group>
+              </Stack.Navigator>
+              <StatusBar style="auto" />
+            </NavigationContainer>
+          </IngredientContextProvider>
         </GestureHandlerRootView>
       </SafeAreaProvider>
     </Suspense>

@@ -1,14 +1,19 @@
-import {
-  Image,
-  StyleSheet,
-  TouchableWithoutFeedback,
-  View,
-} from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { UseNavigation } from "../../types/navigation";
+import { Image, StyleSheet, TouchableWithoutFeedback, View } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
+import { UseNavigation } from '../../types/navigation'
+import { useCallback } from 'react'
+import { Ingredient, useIngredients } from '../../contexts/IngredientContext'
+
 
 export function StepFive() {
   const { navigate } = useNavigation<UseNavigation<"SpellStepFive">>();
+
+  const ingredients = useIngredients()
+
+  const onSubmit = useCallback(() => {
+    ingredients.collect(Ingredient.Pumpkin)
+    navigate("Map")
+  }, [ ingredients, navigate ])
 
   return (
     <View style={styles.screen}>
@@ -24,7 +29,7 @@ export function StepFive() {
 
       <View style={styles.absolute}>
         <TouchableWithoutFeedback
-          onPress={() => navigate("Map")}
+          onPress={onSubmit}
           style={styles.touchable}
         >
           <View style={styles.touchableContent}></View>
