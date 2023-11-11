@@ -49,13 +49,13 @@
       [
         "expo-location",
         {
-          "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
+          "locationAlwaysAndWhenInUsePermission": "Allow Motion Potion to use your location."
         }
       ],
       [
         "expo-sensors",
         {
-          "motionPermission": "Allow $(PRODUCT_NAME) to access your device motion."
+          "motionPermission": "Allow Motion Potion to access your device motion."
         }
       ]
     ]
