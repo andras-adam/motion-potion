@@ -7,7 +7,7 @@ import { ActivityIndicator, StyleSheet, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { HomeScreen } from "./screens/home/HomeScreen";
-import { OtherScreen } from "./screens/other/OtherScreen";
+import { DebugScreen } from "./screens/debug/DebugScreen";
 import { NavigatorParamList } from "./types/navigation";
 import { MapScreen } from "./screens/map/MapScreen";
 import * as Location from "expo-location";
@@ -41,7 +41,7 @@ export default function App() {
           <NavigationContainer>
             <Stack.Navigator initialRouteName="Home">
               <Stack.Screen name="Home" component={HomeScreen} />
-              <Stack.Screen name="Other" component={OtherScreen} />
+              <Stack.Screen name="Debug" component={DebugScreen} />
               <Stack.Screen
                 name="Map"
                 options={{ headerShown: false }}

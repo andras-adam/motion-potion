@@ -75,7 +75,7 @@ function classify_motion_period(motion_period: Position[]): Movement {
   }
 
   // If velocity vector goes through threshold in one cardinal direction
-  // AND not for any other
+  // AND not for any debug
   // then line (vert or horizontal or pull)
   const line_variants = [
     // X

@@ -5,7 +5,7 @@ import { NavigationProp, RouteProp } from "@react-navigation/native";
 export type NavigatorParamList = {
   Home: undefined
   Map: undefined
-  Other: { foo: string }
+  Debug: undefined
   // Spell flow
   SpellStepOne: undefined
   SpellStepTwo: undefined

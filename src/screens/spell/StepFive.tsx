@@ -4,21 +4,21 @@ import { UseNavigation } from '../../types/navigation'
 
 
 export function StepFive() {
-  const { navigate, dispatch } = useNavigation<UseNavigation<'SpellStepFive'>>()
+  const { navigate } = useNavigation<UseNavigation<'SpellStepFive'>>()
 
   return (
     <View style={styles.screen}>
 
       {/* Touchable hitbox for the image button */}
 
-      {/*<View style={styles.absolute}>*/}
-      {/*  <TouchableWithoutFeedback*/}
-      {/*    onPress={() => navigate('SpellStepFive')}*/}
-      {/*    style={styles.touchable}*/}
-      {/*  >*/}
-      {/*    <View style={styles.touchableContent}></View>*/}
-      {/*  </TouchableWithoutFeedback>*/}
-      {/*</View>*/}
+      <View style={styles.absolute}>
+        <TouchableWithoutFeedback
+          onPress={() => navigate('Home')}
+          style={styles.touchable}
+        >
+          <View style={styles.touchableContent}></View>
+        </TouchableWithoutFeedback>
+      </View>
 
       {/* Fullscreen image */}
 

@@ -1,21 +1,11 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TouchableWithoutFeedback,
-  View,
-} from "react-native";
-import {
-  InputDatum,
-  Movement,
-  detect_figure,
-} from "../../motionrecog/motion_recognition";
-import { DeviceMotion, DeviceMotionMeasurement } from "expo-sensors";
-import { UseNavigation } from "../../types/navigation";
-import { useNavigation } from "@react-navigation/native";
-import Deque from "double-ended-queue";
-import { Subscription } from "expo-sensors/build/Pedometer";
+import { Image, StyleSheet, View } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
+import { UseNavigation } from '../../types/navigation'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { detect_figure, InputDatum, Movement } from '../../motionrecog/motion_recognition'
+import { Subscription } from 'expo-sensors/build/Pedometer'
+import { DeviceMotion, DeviceMotionMeasurement } from 'expo-sensors'
+
 
 export function StepTwo() {
   const { navigate } = useNavigation<UseNavigation<"SpellStepTwo">>();
@@ -85,10 +75,14 @@ export function StepTwo() {
 
   return (
     <View style={styles.screen}>
+
+      {/* Fullscreen image */}
+
       <Image
-        source={require("../../../assets/spell/spell_step_2.png")}
+        source={require('../../../assets/spell/spell_step_2.png')}
         style={styles.image}
       />
+
     </View>
   );
 }
@@ -96,23 +90,12 @@ export function StepTwo() {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    position: "relative",
+    position: 'relative',
+    backgroundColor: '#000000'
   },
   image: {
-    objectFit: "cover",
-    width: "100%",
-    height: "100%",
-  },
-  buttonContainer: {
-    position: "absolute",
-    zIndex: 100,
-    backgroundColor: "#ffff00",
-    height: 100,
-    width: 100,
-  },
-  button: {
-    backgroundColor: "#ffff00",
-    height: 100,
-    width: 100,
-  },
-});
+    objectFit: 'cover',
+    width: '100%',
+    height: '100%'
+  }
+})
