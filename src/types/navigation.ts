@@ -4,6 +4,10 @@ import { NavigationProp, RouteProp } from "@react-navigation/native";
 // Screens and their required parameters in this navigator
 export type NavigatorParamList = {
   Map: undefined
+  // Map tab bar items
+  Quests: undefined
+  Items: undefined
+  Profile: undefined
   // Spell flow
   SpellStepOne: undefined
   SpellStepTwo: undefined
@@ -14,16 +18,13 @@ export type NavigatorParamList = {
   SpiceSpellStepOne: undefined
   SpiceSpellStepTwo: undefined
   SpiceSpellStepThree: undefined
-  // Map tab bar items
-  Quests: undefined
-  Items: undefined
-  Profile: undefined
-  // Other
-  Home: undefined
-  Debug: undefined
+  // Pot flow
   PotStepOne: undefined
   PotStepTwo: undefined
   PotStepThree: undefined
+  // Legacy
+  Home: undefined
+  Debug: undefined
 }
 
 // Helper type for useNavigation() hooks

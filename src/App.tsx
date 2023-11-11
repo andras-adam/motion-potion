@@ -50,44 +50,42 @@ export default function App() {
         <GestureHandlerRootView style={styles.wrapper}>
           <IngredientContextProvider>
             <NavigationContainer theme={DarkTheme}>
-              <Stack.Navigator initialRouteName="Map">
-                <Stack.Screen name="Home" component={HomeScreen} />
-                <Stack.Screen name="Debug" component={DebugScreen} />
-                <Stack.Screen
-                  name="Map"
-                  options={{ headerShown: false }}
-                  component={MapScreen}
-                />
-                <Stack.Group screenOptions={{ headerShown: false }}>
+              <Stack.Navigator initialRouteName="Map" screenOptions={{ headerShown: false }}>
+                <Stack.Screen name="Map" component={MapScreen} />
+                <Stack.Group>
+                  <Stack.Screen name="Quests" component={QuestScreen} />
+                  <Stack.Screen name="Items" component={ItemsScreen} />
+                  <Stack.Screen name="Profile" component={ProfileScreen} />
+                </Stack.Group>
+                <Stack.Group>
                   <Stack.Screen name="SpellStepOne" component={StepOne} />
                   <Stack.Screen name="SpellStepTwo" component={StepTwo} />
                   <Stack.Screen name="SpellStepThree" component={StepThree} />
                   <Stack.Screen name="SpellStepFour" component={StepFour} />
                   <Stack.Screen name="SpellStepFive" component={StepFive} />
                 </Stack.Group>
-                <Stack.Group screenOptions={{ headerShown: false }}>
+                <Stack.Group>
                   <Stack.Screen name="SpiceSpellStepOne" component={SpiceStepOne} />
                   <Stack.Screen name="SpiceSpellStepTwo" component={SpiceStepTwo} />
                   <Stack.Screen name="SpiceSpellStepThree" component={SpiceStepThree} />
                 </Stack.Group>
-                <Stack.Group screenOptions={{ headerShown: false }}>
-                  <Stack.Screen name="Quests" component={QuestScreen} />
-                  <Stack.Screen name="Items" component={ItemsScreen} />
-                  <Stack.Screen name="Profile" component={ProfileScreen} />
-                </Stack.Group>
-                <Stack.Group screenOptions={{ headerShown: false }}>
+                <Stack.Group>
                   <Stack.Screen name="PotStepOne" component={PotStepOne} />
                   <Stack.Screen name="PotStepTwo" component={PotStepTwo} />
                   <Stack.Screen name="PotStepThree" component={PotStepThree} />
+                </Stack.Group>
+                <Stack.Group screenOptions={{ headerShown: true }}>
+                  <Stack.Screen name="Home" component={HomeScreen} />
+                  <Stack.Screen name="Debug" component={DebugScreen} />
                 </Stack.Group>
               </Stack.Navigator>
               <StatusBar style="auto" />
             </NavigationContainer>
           </IngredientContextProvider>
-        </GestureHandlerRootView >
-      </SafeAreaProvider >
-    </Suspense >
-  );
+        </GestureHandlerRootView>
+      </SafeAreaProvider>
+    </Suspense>
+  )
 }
 
 const styles = StyleSheet.create({
