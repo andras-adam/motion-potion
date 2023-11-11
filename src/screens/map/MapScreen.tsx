@@ -67,7 +67,6 @@ export function MapScreen() {
       Math.sin(delta_phi / 2) * Math.sin(delta_phi / 2) +
       Math.cos(phi_1) * Math.cos(phi_2) * Math.sin(Δ_long / 2) * Math.sin(Δ_long / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    console.log(R * c);
     return R * c;
   }
 
@@ -165,7 +164,7 @@ export function MapScreen() {
         >
           <View style={styles.popupContainer}>
             <Text>You are close to the marker!</Text>
-            <Button title="Collect" onPress={() => setIsProximityPopupVisible(false)} />
+            <Button title="Collect" onPress={() => navigate("Cast")} />
             <Button title="Close" onPress={() => setIsProximityPopupVisible(false)} />
           </View>
         </Modal>

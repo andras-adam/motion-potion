@@ -6,6 +6,7 @@ export type NavigatorParamList = {
   Home: undefined
   Map: undefined
   Other: { foo: string }
+  Cast : undefined
 }
 
 // Helper type for useNavigation() hooks

@@ -11,6 +11,7 @@ import { OtherScreen } from "./screens/other/OtherScreen";
 import { NavigatorParamList } from "./types/navigation";
 import { MapScreen } from "./screens/map/MapScreen";
 import * as Location from "expo-location";
+import CastScreen from "./screens/cast/CastScreen";
 
 // Create stack navigator
 const Stack = createNativeStackNavigator<NavigatorParamList>();
@@ -41,6 +42,11 @@ export default function App() {
                 name="Map"
                 options={{ headerShown: false }}
                 component={MapScreen}
+              />
+              <Stack.Screen
+                name="Cast"
+                options={{ headerShown: false }}
+                component={CastScreen}
               />
             </Stack.Navigator>
             <StatusBar style="auto" />
