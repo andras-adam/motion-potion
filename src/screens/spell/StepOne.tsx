@@ -1,44 +1,16 @@
-import { Image, StyleSheet, View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { UseNavigation } from '../../types/navigation'
-import { HeaderBack } from '../../components/HeaderBack'
-import { ActionButton } from '../../components/ActionButton'
+import { ImageScreen } from '../../components/ImageScreen'
 
 
 export function StepOne() {
   const { navigate } = useNavigation<UseNavigation<'SpellStepOne'>>()
 
   return (
-    <View style={styles.screen}>
-
-      {/* Back button */}
-
-      <HeaderBack onPress={() => navigate('Map')} />
-
-      {/* Touchable hitbox for the image button */}
-
-      <ActionButton onPress={() => navigate('SpellStepTwo')} />
-
-      {/* Fullscreen image */}
-
-      <Image
-        source={require('../../../assets/spell/spell_step_1.png')}
-        style={styles.image}
-      />
-
-    </View>
+    <ImageScreen
+      action={() => navigate('SpellStepTwo')}
+      onPressBack={() => navigate('Map')}
+      source={require('../../../assets/spell/spell_step_1.png')}
+    />
   )
 }
-
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    position: 'relative',
-    backgroundColor: '#000000'
-  },
-  image: {
-    objectFit: 'cover',
-    width: '100%',
-    height: '100%'
-  }
-})

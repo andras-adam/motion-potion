@@ -1,4 +1,3 @@
-import { Image, StyleSheet, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { UseNavigation } from "../../types/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -9,7 +8,7 @@ import {
 } from "../../motionrecog/motion_recognition";
 import { Subscription } from "expo-sensors/build/Pedometer";
 import { DeviceMotion, DeviceMotionMeasurement } from "expo-sensors";
-import { HeaderBack } from '../../components/HeaderBack'
+import { ImageScreen } from '../../components/ImageScreen'
 
 export function StepTwo() {
   const { navigate } = useNavigation<UseNavigation<"SpellStepTwo">>();
@@ -77,31 +76,9 @@ export function StepTwo() {
   }, []);
 
   return (
-    <View style={styles.screen}>
-
-      {/* Back button */}
-
-      <HeaderBack onPress={() => navigate('Map')} />
-
-      {/* Fullscreen image */}
-
-      <Image
-        source={require("../../../assets/spell/spell_step_2.png")}
-        style={styles.image}
-      />
-    </View>
-  );
+    <ImageScreen
+      onPressBack={() => navigate('Map')}
+      source={require('../../../assets/spell/spell_step_2.png')}
+    />
+  )
 }
-
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    position: "relative",
-    backgroundColor: "#000000",
-  },
-  image: {
-    objectFit: "cover",
-    width: "100%",
-    height: "100%",
-  },
-});
