@@ -16,8 +16,8 @@ export function SpiceStepThree() {
 
   return (
     <ImageScreen
-      action={() => navigate('SpiceSpellStepTwo')}
-      onPressBack={onSubmit}
+      action={onSubmit}
+      onPressBack={() => navigate("Map")}
       source={require('../../../assets/spell/spice_spell_step_3.png')}
     />
   )
