@@ -6,6 +6,7 @@ import { detect_figure, InputDatum, Movement } from '../../motionrecog/motion_re
 import { Subscription } from 'expo-sensors/build/Pedometer'
 import { DeviceMotion, DeviceMotionMeasurement } from 'expo-sensors'
 
+
 export function StepTwo() {
   const { navigate } = useNavigation<UseNavigation<"SpellStepTwo">>();
   // @ts-ignore
