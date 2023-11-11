@@ -8,7 +8,7 @@ import {
 
 const SIZE = 300;
 
-export function OtherScreen() {
+export function DebugScreen() {
   const [started, setStarted] = useState(false);
 
   const [entries, setEntries] = useState<{ x: number; y: number }[]>([]);
