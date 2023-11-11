@@ -11,8 +11,11 @@ import { OtherScreen } from "./screens/other/OtherScreen";
 import { NavigatorParamList } from "./types/navigation";
 import { MapScreen } from "./screens/map/MapScreen";
 import * as Location from "expo-location";
-import CastScreen from "./screens/cast/CastScreen";
 import { StepOne } from './screens/spell/StepOne'
+import { StepFive } from './screens/spell/StepFive'
+import { StepFour } from './screens/spell/StepFour'
+import { StepThree } from './screens/spell/StepThree'
+import { StepTwo } from './screens/spell/StepTwo'
 
 // Create stack navigator
 const Stack = createNativeStackNavigator<NavigatorParamList>();
@@ -44,16 +47,13 @@ export default function App() {
                 options={{ headerShown: false }}
                 component={MapScreen}
               />
-              <Stack.Screen
-                name="Cast"
-                options={{ headerShown: false }}
-                component={CastScreen}
-              />
-              <Stack.Screen
-                name="Spell"
-                options={{ headerShown: false }}
-                component={StepOne}
-              />
+              <Stack.Group screenOptions={{ headerShown: false }}>
+                <Stack.Screen name="SpellStepOne" component={StepOne} />
+                <Stack.Screen name="SpellStepTwo" component={StepTwo} />
+                <Stack.Screen name="SpellStepThree" component={StepThree} />
+                <Stack.Screen name="SpellStepFour" component={StepFour} />
+                <Stack.Screen name="SpellStepFive" component={StepFive} />
+              </Stack.Group>
             </Stack.Navigator>
             <StatusBar style="auto" />
           </NavigationContainer>

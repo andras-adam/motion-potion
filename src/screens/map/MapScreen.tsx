@@ -36,8 +36,6 @@ export function MapScreen() {
   const [isTooFarPopupVisible, setIsTooFarPopupVisible] = useState(false);
   const [isProximityPopupVisible, setIsProximityPopupVisible] = useState(false);
 
-
-
   const { navigate } = useNavigation<UseNavigation<"Map">>();
 
   const checkProximityAndTogglePopup = (markerCoord: LatLng) => {
@@ -46,7 +44,7 @@ export function MapScreen() {
         { latitude: location.latitude, longitude: location.longitude },
         markerCoord
       );
-      const threshold = 200;
+      const threshold = 2000;
 
       if (distance <= threshold) {
         setIsProximityPopupVisible(true);
@@ -58,7 +56,6 @@ export function MapScreen() {
     }
   };
 
-
   function getDistance(coord1: LatLng, coord2: LatLng): number {
     const toRad = (value: number) => (value * Math.PI) / 180;
     const R = 6371e3; //ear radius
@@ -69,11 +66,13 @@ export function MapScreen() {
 
     const a =
       Math.sin(delta_phi / 2) * Math.sin(delta_phi / 2) +
-      Math.cos(phi_1) * Math.cos(phi_2) * Math.sin(delta_long / 2) * Math.sin(delta_long / 2);
+      Math.cos(phi_1) *
+      Math.cos(phi_2) *
+      Math.sin(delta_long / 2) *
+      Math.sin(delta_long / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
   }
-
 
   const markerData: MarkerItem[] = [
     {
@@ -150,10 +149,42 @@ export function MapScreen() {
 
   return (
     <View style={styles.screen}>
-      <MapView style={{ flex: 1 }} initialRegion={region} showsUserLocation={true} customMapStyle={night_style}>
-        <Marker coordinate={{ latitude: 60.16200, longitude: 24.9052 }} image={require("../../../assets/Pumpkin-Map.png")} onPress={() => checkProximityAndTogglePopup({ latitude: 60.16200, longitude: 24.9052 })} />
-        <Marker coordinate={{ latitude: 60.16215, longitude: 24.9060 }} image={require("../../../assets/Pot-Map.png")} onPress={() => checkProximityAndTogglePopup({ latitude: 60.16215, longitude: 24.9060 })} />
-        <Marker coordinate={{ latitude: 60.16190, longitude: 24.9045 }} image={require("../../../assets/Chili-Map.png")} onPress={() => checkProximityAndTogglePopup({ latitude: 60.16190, longitude: 24.9045 })} />
+      <MapView
+        style={{ flex: 1 }}
+        initialRegion={region}
+        showsUserLocation={true}
+        customMapStyle={night_style}
+      >
+        <Marker
+          coordinate={{ latitude: 60.162, longitude: 24.9052 }}
+          image={require("../../../assets/Pumpkin-Map.png")}
+          onPress={() =>
+            checkProximityAndTogglePopup({
+              latitude: 60.162,
+              longitude: 24.9052,
+            })
+          }
+        />
+        <Marker
+          coordinate={{ latitude: 60.16215, longitude: 24.906 }}
+          image={require("../../../assets/Pot-Map.png")}
+          onPress={() =>
+            checkProximityAndTogglePopup({
+              latitude: 60.16215,
+              longitude: 24.906,
+            })
+          }
+        />
+        <Marker
+          coordinate={{ latitude: 60.1619, longitude: 24.9045 }}
+          image={require("../../../assets/Chili-Map.png")}
+          onPress={() =>
+            checkProximityAndTogglePopup({
+              latitude: 60.1619,
+              longitude: 24.9045,
+            })
+          }
+        />
         {markerData.map((item, idx) => (
           <Marker key={idx} coordinate={item.coord} image={item.asset} />
         ))}
@@ -169,8 +200,18 @@ export function MapScreen() {
           <View style={styles.popupContainer}>
             <Text style={styles.modalText}>You are close to the marker!</Text>
             <View style={styles.modalButtonsContainer}>
-              <Pressable onPress={() => navigate("Cast")} style={styles.modalButton}><Text style={styles.modalButtonText}>Collect</Text></Pressable >
-              <Pressable onPress={() => setIsProximityPopupVisible(false)} style={styles.modalButton}><Text style={styles.modalButtonText}> Close</Text></Pressable >
+              <Pressable
+                onPress={() => navigate("SpellCast")}
+                style={styles.modalButton}
+              >
+                <Text style={styles.modalButtonText}>Collect</Text>
+              </Pressable>
+              <Pressable
+                onPress={() => setIsProximityPopupVisible(false)}
+                style={styles.modalButton}
+              >
+                <Text style={styles.modalButtonText}> Close</Text>
+              </Pressable>
             </View>
           </View>
         </Modal>
@@ -185,22 +226,22 @@ export function MapScreen() {
           <View style={styles.popupContainer}>
             <Text style={styles.modalText}>You're too far away!</Text>
             <View style={styles.modalButtonsContainer}>
-              <Pressable onPress={() => setIsTooFarPopupVisible(false)} style={styles.modalButton}><Text style={styles.modalButtonText}> Close</Text></Pressable >
+              <Pressable
+                onPress={() => setIsTooFarPopupVisible(false)}
+                style={styles.modalButton}
+              >
+                <Text style={styles.modalButtonText}> Close</Text>
+              </Pressable>
             </View>
           </View>
         </Modal>
       )}
-      <TouchableHighlight style={styles.buttonContainer} onPress={() => navigate("Home")}>
+      <TouchableHighlight
+        style={styles.buttonContainer}
+        onPress={() => navigate("Home")}
+      >
         <Image source={require("../../../assets/Icon-Left.png")} />
-      </TouchableHighlight >
-
-      <View style={styles.bottomMenuContainer}>
-        <Image source={require("../../../assets/Quest-Map.png")} />
-        <Image source={require("../../../assets/BackPack-Map.png")} />
-        <Image source={require("../../../assets/Wizard-Map.png")} />
-
-      </View>
-
+      </TouchableHighlight>
     </View>
   );
 }
@@ -210,9 +251,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   buttonContainer: {
-    position: 'absolute',
-    top: '10%',
-    alignSelf: 'flex-start',
+    position: "absolute",
+    top: "10%",
+    alignSelf: "flex-start",
   },
   popupContainer: {
     margin: 20,
@@ -223,7 +264,7 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2
+      height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,
@@ -231,8 +272,8 @@ const styles = StyleSheet.create({
   },
   modalButton: {
     backgroundColor: "#FF9051",
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     paddingVertical: 12,
     paddingHorizontal: 32,
     borderRadius: 4,
@@ -247,27 +288,14 @@ const styles = StyleSheet.create({
   modalButtonText: {
     fontSize: 16,
     lineHeight: 21,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     letterSpacing: 0.25,
-    color: 'white',
+    color: "white",
   },
   modalText: {
     fontSize: 16,
     lineHeight: 21,
     letterSpacing: 0.25,
-    color: 'white',
+    color: "white",
   },
-  bottomMenuContainer: {
-    position: 'absolute',
-    bottom: '5%',
-    alignSelf: "center",
-    backgroundColor: "#120733",
-    width: "100%",
-    opacity: 0.8,
-    flexDirection: "row",
-    justifyContent: "space-around",
-
-  }
 });
-
-

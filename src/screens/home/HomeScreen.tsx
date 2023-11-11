@@ -2,6 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Button, StyleSheet, Text, View } from "react-native";
 import { UseNavigation } from "../../types/navigation";
 
+
 export function HomeScreen() {
   const { navigate } = useNavigation<UseNavigation<"Home">>();
 
@@ -13,14 +14,11 @@ export function HomeScreen() {
         onPress={() => navigate("Other", { foo: "bar" })}
       />
       <Text>Home screen</Text>
-      <Button
-        title="To map screen"
-        onPress={() => navigate("Map")}
-      />
+      <Button title="To map screen" onPress={() => navigate("Map")} />
       <Text>Spell screen</Text>
       <Button
         title="To spell screen"
-        onPress={() => navigate("Spell")}
+        onPress={() => navigate("SpellStepOne")}
       />
     </View>
   );
