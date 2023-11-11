@@ -9,7 +9,7 @@ export function QuestScreen() {
   return (
     <ImageScreen
       onPressBack={goBack}
-      source={require('../../../assets/menu/Quests.png') /* TODO use quests image */}
+      source={require('../../../assets/menu/Quests.png')}
     />
   )
 }
