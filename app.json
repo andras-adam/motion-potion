@@ -34,7 +34,7 @@
       ],
       "config": {
         "googleMaps": {
-          "apiKey": "AIzaSyBkJGlFkjzqy-M7vfprkbSTSVu5RZf2VbU"
+          "apiKey": "no-key-here"
         }
       },
       "package": "com.andras.adam.motionpotion"
