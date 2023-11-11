@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Wizard Lizard",
-    "slug": "wizardlizard",
+    "name": "Motion Potion",
+    "slug": "motion-potion",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -15,35 +15,34 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSMotionUsageDescription": "Allow Motion Potion to access your device motion."
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.andras.adam.wizardlizard",
       "permissions": [
         "android.permission.ACCESS_FINE_LOCATION",
         "android.permission.ACCESS_COARSE_LOCATION",
         "android.permission.ACCESS_BACKGROUND_LOCATION",
         "android.permission.CAMERA",
         "android.permission.ACTIVITY_RECOGNITION",
-        "android.permission.HIGH_SAMPLING_RATE_SENSORS"
+        "android.permission.HIGH_SAMPLING_RATE_SENSORS",
+        "android.permission.FOREGROUND_SERVICE"
       ],
       "config": {
         "googleMaps": {
           "apiKey": "AIzaSyBkJGlFkjzqy-M7vfprkbSTSVu5RZf2VbU"
         }
-      }
+      },
+      "package": "com.andras.adam.motionpotion"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "2e315d9a-5719-4103-80e0-b5acd1d08309"
-      }
     },
     "plugins": [
       [
@@ -58,6 +57,11 @@
           "motionPermission": "Allow Motion Potion to access your device motion."
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "a6d22668-727f-49eb-a375-d529f3ca84f6"
+      }
+    }
   }
 }

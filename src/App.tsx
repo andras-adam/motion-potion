@@ -11,11 +11,11 @@ import { DebugScreen } from "./screens/debug/DebugScreen";
 import { NavigatorParamList } from "./types/navigation";
 import { MapScreen } from "./screens/map/MapScreen";
 import * as Location from "expo-location";
-import { StepOne } from './screens/spell/StepOne'
-import { StepFive } from './screens/spell/StepFive'
-import { StepFour } from './screens/spell/StepFour'
-import { StepThree } from './screens/spell/StepThree'
-import { StepTwo } from './screens/spell/StepTwo'
+import { StepOne } from "./screens/spell/StepOne";
+import { StepFive } from "./screens/spell/StepFive";
+import { StepFour } from "./screens/spell/StepFour";
+import { StepThree } from "./screens/spell/StepThree";
+import { StepTwo } from "./screens/spell/StepTwo";
 
 // Create stack navigator
 const Stack = createNativeStackNavigator<NavigatorParamList>();
@@ -39,7 +39,7 @@ export default function App() {
       <SafeAreaProvider style={styles.wrapper}>
         <GestureHandlerRootView style={styles.wrapper}>
           <NavigationContainer>
-            <Stack.Navigator initialRouteName="Home">
+            <Stack.Navigator initialRouteName="Map">
               <Stack.Screen name="Home" component={HomeScreen} />
               <Stack.Screen name="Debug" component={DebugScreen} />
               <Stack.Screen

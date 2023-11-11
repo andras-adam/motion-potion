@@ -40,7 +40,7 @@ export function MapScreen() {
         { latitude: location.latitude, longitude: location.longitude },
         markerCoord
       );
-      const threshold = 20;
+      const threshold = 500;
 
       if (distance <= threshold) {
         setIsProximityPopupVisible(true);
@@ -189,56 +189,52 @@ export function MapScreen() {
         ))}
       </MapView>
 
-      {
-        isProximityPopupVisible && (
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={isProximityPopupVisible}
-            onRequestClose={() => setIsProximityPopupVisible(false)}
-          >
-            <View style={styles.popupContainer}>
-              <Text style={styles.modalText}>You are close to the marker!</Text>
-              <View style={styles.modalButtonsContainer}>
-                <Pressable
-                  onPress={() => navigate("SpellStepOne")}
-                  style={styles.modalButton}
-                >
-                  <Text style={styles.modalButtonText}>Collect</Text>
-                </Pressable>
-                <Pressable
-                  onPress={() => setIsProximityPopupVisible(false)}
-                  style={styles.modalButton}
-                >
-                  <Text style={styles.modalButtonText}> Close</Text>
-                </Pressable>
-              </View>
+      {isProximityPopupVisible && (
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={isProximityPopupVisible}
+          onRequestClose={() => setIsProximityPopupVisible(false)}
+        >
+          <View style={styles.popupContainer}>
+            <Text style={styles.modalText}>You are close to the marker!</Text>
+            <View style={styles.modalButtonsContainer}>
+              <Pressable
+                onPress={() => navigate("SpellStepOne")}
+                style={styles.modalButton}
+              >
+                <Text style={styles.modalButtonText}>Collect</Text>
+              </Pressable>
+              <Pressable
+                onPress={() => setIsProximityPopupVisible(false)}
+                style={styles.modalButton}
+              >
+                <Text style={styles.modalButtonText}> Close</Text>
+              </Pressable>
             </View>
-          </Modal>
-        )
-      }
-      {
-        isTooFarPopupVisible && (
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={isTooFarPopupVisible}
-            onRequestClose={() => setIsTooFarPopupVisible(false)}
-          >
-            <View style={styles.popupContainer}>
-              <Text style={styles.modalText}>You're too far away!</Text>
-              <View style={styles.modalButtonsContainer}>
-                <Pressable
-                  onPress={() => setIsTooFarPopupVisible(false)}
-                  style={styles.modalButton}
-                >
-                  <Text style={styles.modalButtonText}> Close</Text>
-                </Pressable>
-              </View>
+          </View>
+        </Modal>
+      )}
+      {isTooFarPopupVisible && (
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={isTooFarPopupVisible}
+          onRequestClose={() => setIsTooFarPopupVisible(false)}
+        >
+          <View style={styles.popupContainer}>
+            <Text style={styles.modalText}>You're too far away!</Text>
+            <View style={styles.modalButtonsContainer}>
+              <Pressable
+                onPress={() => setIsTooFarPopupVisible(false)}
+                style={styles.modalButton}
+              >
+                <Text style={styles.modalButtonText}> Close</Text>
+              </Pressable>
             </View>
-          </Modal>
-        )
-      }
+          </View>
+        </Modal>
+      )}
       <TouchableHighlight
         style={styles.buttonContainer}
         onPress={() => navigate("Home")}
@@ -250,7 +246,7 @@ export function MapScreen() {
         <TouchableHighlight onPress={() => console.log("Bruh2")}><Image source={require("../../../assets/BackPack-Map.png")} /></TouchableHighlight>
         <TouchableHighlight onPress={() => console.log("Bruh3")}><Image source={require("../../../assets/Wizard-Map.png")} /></TouchableHighlight>
       </View>
-    </View >
+    </View>
   );
 }
 
@@ -315,5 +311,5 @@ const styles = StyleSheet.create({
     backgroundColor: "#120733",
     opacity: 0.8,
     width: "100%",
-  }
+  },
 });
