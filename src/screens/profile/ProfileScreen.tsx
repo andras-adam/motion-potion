@@ -9,7 +9,7 @@ export function ProfileScreen() {
   return (
     <ImageScreen
       onPressBack={goBack}
-      source={require('../../../assets/spell/spell_step_1.png') /* TODO use profile image */}
+      source={require('../../../assets/menu/Profile.png') /* TODO use profile image */}
     />
   )
 }
