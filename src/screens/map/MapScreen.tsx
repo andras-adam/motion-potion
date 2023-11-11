@@ -103,7 +103,10 @@ export function MapScreen() {
     },
   ];
 
+  const [ granted, setGranted ] = useState(false)
+
   useEffect(() => {
+    if (!granted) return
     (async () => {
       let location = await Location.getLastKnownPositionAsync();
       if (!location) {
@@ -119,11 +122,12 @@ export function MapScreen() {
       setLocation(coords);
       setRenderReady(true);
     })();
-  }, []);
+  }, [ granted ]);
 
   let [location, setLocation] = useState<LocationObjectCoords | undefined>();
 
   useEffect(() => {
+    if (!granted) return
     Location.watchPositionAsync(
       {
         accuracy: 5,
@@ -135,7 +139,14 @@ export function MapScreen() {
         setLocation(loc.coords);
       }
     );
-  }, []);
+  }, [ granted ]);
+
+  useEffect(() => {
+    (async () => {
+      const response = await Location.requestForegroundPermissionsAsync()
+      setGranted(response.granted)
+    })()
+  }, [])
 
   if (!renderReady) {
     return <View style={styles.screen}></View>;
