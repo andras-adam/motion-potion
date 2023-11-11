@@ -33,7 +33,7 @@ export function MapScreen() {
 
   const { navigate } = useNavigation<UseNavigation<"Map">>();
 
-  const checkProximityAndTogglePopup = (markerCoord: LatLng) => {
+  const checkProximityAndTogglePopup = (markerCoord: LatLng, marker: string) => {
     if (location) {
       const distance = getDistance(
         { latitude: location.latitude, longitude: location.longitude },
@@ -43,7 +43,15 @@ export function MapScreen() {
 
       if (distance <= threshold) {
         setIsTooFarPopupVisible(false);
-        navigate("SpellStepOne");
+        if (marker === "pumpkin") {
+          navigate("SpellStepOne");
+        }
+        else if (marker === "chili") {
+          navigate("SpiceSpellStepOne")
+        }
+        else if (marker === "pot") { //TODO: Add zod logic here
+          //navigate("???")
+        }
       } else {
         setIsTooFarPopupVisible(true);
       }
@@ -159,7 +167,7 @@ export function MapScreen() {
             checkProximityAndTogglePopup({
               latitude: 60.162,
               longitude: 24.9052,
-            })
+            }, "pumpkin")
           }
         />
         <Marker
@@ -169,7 +177,7 @@ export function MapScreen() {
             checkProximityAndTogglePopup({
               latitude: 60.16215,
               longitude: 24.906,
-            })
+            }, "pot")
           }
         />
         <Marker
@@ -179,7 +187,7 @@ export function MapScreen() {
             checkProximityAndTogglePopup({
               latitude: 60.1619,
               longitude: 24.9045,
-            })
+            }, "chili")
           }
         />
         {markerData.map((item, idx) => (

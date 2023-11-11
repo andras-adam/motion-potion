@@ -16,6 +16,9 @@ import { StepFive } from "./screens/spell/StepFive";
 import { StepFour } from "./screens/spell/StepFour";
 import { StepThree } from "./screens/spell/StepThree";
 import { StepTwo } from "./screens/spell/StepTwo";
+import { SpiceStepOne } from './screens/spell spice/SpiceStepOne';
+import { SpiceStepTwo } from './screens/spell spice/SpiceStepTwo';
+import { SpiceStepThree } from './screens/spell spice/SpiceStepThree';
 
 // Create stack navigator
 const Stack = createNativeStackNavigator<NavigatorParamList>();
@@ -53,6 +56,9 @@ export default function App() {
                 <Stack.Screen name="SpellStepThree" component={StepThree} />
                 <Stack.Screen name="SpellStepFour" component={StepFour} />
                 <Stack.Screen name="SpellStepFive" component={StepFive} />
+                <Stack.Screen name="SpiceSpellStepOne" component={SpiceStepOne} />
+                <Stack.Screen name="SpiceSpellStepTwo" component={SpiceStepTwo} />
+                <Stack.Screen name="SpiceSpellStepThree" component={SpiceStepThree} />
               </Stack.Group>
             </Stack.Navigator>
             <StatusBar style="auto" />
