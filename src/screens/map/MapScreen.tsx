@@ -320,6 +320,7 @@ const styles = StyleSheet.create({
   menuContainer: {
     position: "absolute",
     bottom: "0%",
+    padding: 12,
     alignSelf: "center",
     flexDirection: "row",
     justifyContent: "space-around",
