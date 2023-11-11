@@ -1,1 +1,1 @@
-# Wizard Lizard
+# motion-potion
