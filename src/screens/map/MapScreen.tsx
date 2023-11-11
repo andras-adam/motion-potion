@@ -171,6 +171,7 @@ export function MapScreen() {
     <View style={styles.screen}>
       <MapView
         style={{ flex: 1 }}
+        loadingBackgroundColor="#120733"
         initialRegion={region}
         showsUserLocation={true}
         customMapStyle={night_style}
