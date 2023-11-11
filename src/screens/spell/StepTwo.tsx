@@ -18,7 +18,7 @@ import Deque from "double-ended-queue";
 import { Subscription } from "expo-sensors/build/Pedometer";
 
 export function StepTwo() {
-  const { navigate } = useNavigation<UseNavigation<"SpellCast">>();
+  const { navigate } = useNavigation<UseNavigation<"SpellStepTwo">>();
   // @ts-ignore
   const motionData = useRef<InputDatum[]>([]);
   const i = useRef<number>(0);
@@ -49,7 +49,7 @@ export function StepTwo() {
           if (listenerRef.current.length > 0) {
             listenerRef.current[0].remove();
           }
-          navigate("StepThree");
+          navigate("SpellStepThree");
         }
       }
     }
