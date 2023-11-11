@@ -1,4 +1,4 @@
-import { NavigationContainer } from "@react-navigation/native";
+import { DarkTheme, NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { registerRootComponent } from "expo";
 import { StatusBar } from "expo-status-bar";
@@ -38,7 +38,7 @@ export default function App() {
     >
       <SafeAreaProvider style={styles.wrapper}>
         <GestureHandlerRootView style={styles.wrapper}>
-          <NavigationContainer>
+          <NavigationContainer theme={DarkTheme}>
             <Stack.Navigator initialRouteName="Map">
               <Stack.Screen name="Home" component={HomeScreen} />
               <Stack.Screen name="Debug" component={DebugScreen} />
