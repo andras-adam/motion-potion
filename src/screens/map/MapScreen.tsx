@@ -1,9 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import {
-  Button,
   StyleSheet,
   Text,
-  TouchableNativeFeedback,
   View,
   Modal,
   Image,
@@ -13,9 +11,7 @@ import {
 import { UseNavigation } from "../../types/navigation";
 import MapView, { LatLng, Marker, Region } from "react-native-maps";
 
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { Ionicons } from "@expo/vector-icons";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import * as Location from "expo-location";
 import { LocationObjectCoords } from "expo-location";
 import { night_style } from "../../mapstyles/night_style";
@@ -58,16 +54,16 @@ export function MapScreen() {
 
   function getDistance(coord1: LatLng, coord2: LatLng): number {
     const toRad = (value: number) => (value * Math.PI) / 180;
-    const R = 6371e3; //ear radius
-    const phi_1 = toRad(coord1.latitude);
-    const phi_2 = toRad(coord2.latitude);
+    const R = 6371e3; //earth radius
+    const toRad_1 = toRad(coord1.latitude);
+    const toRad_2 = toRad(coord2.latitude);
     const delta_phi = toRad(coord2.latitude - coord1.latitude);
     const delta_long = toRad(coord2.longitude - coord1.longitude);
 
     const a =
       Math.sin(delta_phi / 2) * Math.sin(delta_phi / 2) +
-      Math.cos(phi_1) *
-      Math.cos(phi_2) *
+      Math.cos(toRad_1) *
+      Math.cos(toRad_2) *
       Math.sin(delta_long / 2) *
       Math.sin(delta_long / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
@@ -250,9 +246,9 @@ export function MapScreen() {
         <Image source={require("../../../assets/Icon-Left.png")} />
       </TouchableHighlight>
       <View style={styles.menuContainer}>
-        <Image source={require("../../../assets/Quest-Map.png")} />
-        <Image source={require("../../../assets/BackPack-Map.png")} />
-        <Image source={require("../../../assets/Wizard-Map.png")} />
+        <TouchableHighlight onPress={() => console.log("Bruh1")}><Image source={require("../../../assets/Quest-Map.png")} /></TouchableHighlight>
+        <TouchableHighlight onPress={() => console.log("Bruh2")}><Image source={require("../../../assets/BackPack-Map.png")} /></TouchableHighlight>
+        <TouchableHighlight onPress={() => console.log("Bruh3")}><Image source={require("../../../assets/Wizard-Map.png")} /></TouchableHighlight>
       </View>
     </View >
   );
@@ -312,7 +308,7 @@ const styles = StyleSheet.create({
   },
   menuContainer: {
     position: "absolute",
-    bottom: "5%",
+    bottom: "0%",
     alignSelf: "center",
     flexDirection: "row",
     justifyContent: "space-around",
