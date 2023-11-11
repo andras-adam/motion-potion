@@ -99,12 +99,6 @@ const styles = StyleSheet.create({
     position: "relative",
     backgroundColor: "#000000",
   },
-  touchable: {
-    flex: 1
-  },
-  touchableContent: {
-    flex: 1
-  },
   image: {
     objectFit: "cover",
     width: "100%",
