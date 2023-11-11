@@ -37,7 +37,7 @@ export function SpiceStepTwo() {
       i.current = 0;
       let res = detect_figure(motionData.current);
       for (const movement of res) {
-        if (movement == Movement.circle) {
+        if (movement == Movement.line_x) {
           if (listenerRef.current.length > 0) {
             listenerRef.current[0].remove();
           }
