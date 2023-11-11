@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import * as Location from "expo-location";
 import { LocationObjectCoords } from "expo-location";
 import { night_style } from "../../mapstyles/night_style";
+import { useIngredients } from "../../contexts/IngredientContext";
 
 type MarkerItem = {
   coord: LatLng;
@@ -33,7 +34,14 @@ export function MapScreen() {
 
   const { navigate } = useNavigation<UseNavigation<"Map">>();
 
-  const checkProximityAndTogglePopup = (markerCoord: LatLng, marker: string) => {
+  const ingredients = useIngredients();
+
+  const potUnlocked = new Set(ingredients.collected).size == 2;
+
+  const checkProximityAndTogglePopup = (
+    markerCoord: LatLng,
+    marker: string
+  ) => {
     if (location) {
       const distance = getDistance(
         { latitude: location.latitude, longitude: location.longitude },
@@ -114,7 +122,7 @@ export function MapScreen() {
   const [granted, setGranted] = useState(false)
 
   useEffect(() => {
-    if (!granted) return
+    if (!granted) return;
     (async () => {
       let location = await Location.getLastKnownPositionAsync();
       if (!location) {
@@ -131,113 +139,132 @@ export function MapScreen() {
       setRenderReady(true);
     })();
   }, [granted]);
+}, [granted]);
 
-  let [location, setLocation] = useState<LocationObjectCoords | undefined>();
+let [location, setLocation] = useState<LocationObjectCoords | undefined>();
 
-  useEffect(() => {
-    if (!granted) return
-    Location.watchPositionAsync(
-      {
-        accuracy: 5,
-        mayShowUserSettingsDialog: true,
-        timeInterval: 300,
-        distanceInterval: 5,
-      },
-      (loc) => {
-        setLocation(loc.coords);
-      }
-    );
+useEffect(() => {
+  if (!granted) return;
+  Location.watchPositionAsync(
+    {
+      accuracy: 5,
+      mayShowUserSettingsDialog: true,
+      timeInterval: 300,
+      distanceInterval: 5,
+    },
+    (loc) => {
+      setLocation(loc.coords);
+    }
+  );
+}, [granted]);
   }, [granted]);
 
-  useEffect(() => {
-    (async () => {
-      const response = await Location.requestForegroundPermissionsAsync()
-      setGranted(response.granted)
-    })()
-  }, [])
+useEffect(() => {
+  (async () => {
+    const response = await Location.requestForegroundPermissionsAsync();
+    setGranted(response.granted);
+  })();
+}, []);
 
-  if (!renderReady) {
-    return <View style={styles.screen}></View>;
-  }
+if (!renderReady) {
+  return <View style={styles.screen}></View>;
+}
 
-  return (
-    <View style={styles.screen}>
-      <MapView
-        style={{ flex: 1 }}
-        initialRegion={region}
-        showsUserLocation={true}
-        customMapStyle={night_style}
-        showsCompass={false}
-        toolbarEnabled={false}
-        showsMyLocationButton={false}
-      >
-        <Marker
-          coordinate={{ latitude: 60.162, longitude: 24.9052 }}
-          image={require("../../../assets/Pumpkin-Map.png")}
-          onPress={() =>
-            checkProximityAndTogglePopup({
+return (
+  <View style={styles.screen}>
+    <MapView
+      style={{ flex: 1 }}
+      initialRegion={region}
+      showsUserLocation={true}
+      customMapStyle={night_style}
+      showsCompass={false}
+      toolbarEnabled={false}
+      showsMyLocationButton={false}
+    >
+      <Marker
+        coordinate={{ latitude: 60.162, longitude: 24.9052 }}
+        image={require("../../../assets/Pumpkin-Map.png")}
+        onPress={() =>
+          checkProximityAndTogglePopup(
+            {
               latitude: 60.162,
               longitude: 24.9052,
-            }, "pumpkin")
+            },
+            "pumpkin"
+          )
+        }
+      />
+      <Marker
+        coordinate={{ latitude: 60.16215, longitude: 24.906 }}
+        image={
+          potUnlocked
+            ? require("../../../assets/Pot-Map.png")
+            : require("../../../assets/Pot-Map-locked.png")
+        }
+        onPress={() => {
+          if (potUnlocked) {
+            checkProximityAndTogglePopup(
+              {
+                latitude: 60.16215,
+                longitude: 24.906,
+              },
+              "pot"
+            );
+          } else {
+            // Rafał todo modal
           }
-        />
-        <Marker
-          coordinate={{ latitude: 60.16215, longitude: 24.906 }}
-          image={require("../../../assets/Pot-Map.png")}
-          onPress={() =>
-            checkProximityAndTogglePopup({
-              latitude: 60.16215,
-              longitude: 24.906,
-            }, "pot")
-          }
-        />
-        <Marker
-          coordinate={{ latitude: 60.1619, longitude: 24.9045 }}
-          image={require("../../../assets/Chili-Map.png")}
-          onPress={() =>
-            checkProximityAndTogglePopup({
+        }}
+      />
+      <Marker
+        coordinate={{ latitude: 60.1619, longitude: 24.9045 }}
+        image={require("../../../assets/Chili-Map.png")}
+        onPress={() =>
+          checkProximityAndTogglePopup(
+            {
               latitude: 60.1619,
               longitude: 24.9045,
-            }, "chili")
-          }
-        />
-        {markerData.map((item, idx) => (
-          <Marker key={idx} coordinate={item.coord} image={item.asset} />
-        ))}
-      </MapView>
-      {isTooFarPopupVisible && (
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={isTooFarPopupVisible}
-          onRequestClose={() => setIsTooFarPopupVisible(false)}
-        >
-          <View style={styles.popupContainer}>
-            <Text style={styles.modalText}>You're too far away!</Text>
-            <View style={styles.modalButtonsContainer}>
-              <Pressable
-                onPress={() => setIsTooFarPopupVisible(false)}
-                style={styles.modalButton}
-              >
-                <Text style={styles.modalButtonText}> Close</Text>
-              </Pressable>
-            </View>
+            },
+            "chili"
+          )
+        }
+      />
+      {markerData.map((item, idx) => (
+        <Marker key={idx} coordinate={item.coord} image={item.asset} />
+      ))}
+    </MapView>
+    {isTooFarPopupVisible && (
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={isTooFarPopupVisible}
+        onRequestClose={() => setIsTooFarPopupVisible(false)}
+      >
+        <View style={styles.popupContainer}>
+          <Text style={styles.modalText}>You're too far away!</Text>
+          <View style={styles.modalButtonsContainer}>
+            <Pressable
+              onPress={() => setIsTooFarPopupVisible(false)}
+              style={styles.modalButton}
+            >
+              <Text style={styles.modalButtonText}> Close</Text>
+            </Pressable>
           </View>
-        </Modal>
-      )}
-      <View style={styles.menuContainer}>
-        <TouchableHighlight onPress={() => console.log("Bruh1")}>
-          <Image source={require("../../../assets/Quest-Map.png")} />
-        </TouchableHighlight>
-        <TouchableHighlight onPress={() => console.log("Bruh2")}>
-          <Image source={require("../../../assets/BackPack-Map.png")} />
-        </TouchableHighlight>
-        <TouchableHighlight onPress={() => console.log("Bruh3")}>
-          <Image source={require("../../../assets/Wizard-Map.png")} />
-        </TouchableHighlight>
-      </View>
+        </View>
+      </Modal>
+    )}
+    <View style={styles.menuContainer}>
+      <TouchableHighlight onPress={() => console.log("Bruh1")}>
+        <Image source={require("../../../assets/Quest-Map.png")} />
+      </TouchableHighlight>
+      <TouchableHighlight onPress={() => console.log("Bruh2")}>
+        <Image source={require("../../../assets/BackPack-Map.png")} />
+      </TouchableHighlight>
+      <TouchableHighlight onPress={() => console.log("Bruh3")}>
+        <Image source={require("../../../assets/Wizard-Map.png")} />
+      </TouchableHighlight>
     </View>
-  );
+  </View>
+);
 }
 
 const styles = StyleSheet.create({
