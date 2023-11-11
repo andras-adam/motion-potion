@@ -148,8 +148,8 @@ export function MapScreen() {
   return (
     <View style={styles.screen}>
       <MapView style={{ flex: 1 }} initialRegion={region} showsUserLocation={true}>
-        <Marker coordinate={{ latitude: 60.16200, longitude: 24.9052 }} image={require("../../../assets/Chili-Map.png")} onPress={() => checkProximityAndTogglePopup({ latitude: 60.16200, longitude: 24.9052 })} />
-        <Marker coordinate={{ latitude: 60.16215, longitude: 24.9060 }} image={require("../../../assets/Chili-Map.png")} onPress={() => checkProximityAndTogglePopup({ latitude: 60.16215, longitude: 24.9060 })} />
+        <Marker coordinate={{ latitude: 60.16200, longitude: 24.9052 }} image={require("../../../assets/Pumpkin-Map.png")} onPress={() => checkProximityAndTogglePopup({ latitude: 60.16200, longitude: 24.9052 })} />
+        <Marker coordinate={{ latitude: 60.16215, longitude: 24.9060 }} image={require("../../../assets/Pot-Map.png")} onPress={() => checkProximityAndTogglePopup({ latitude: 60.16215, longitude: 24.9060 })} />
         <Marker coordinate={{ latitude: 60.16190, longitude: 24.9045 }} image={require("../../../assets/Chili-Map.png")} onPress={() => checkProximityAndTogglePopup({ latitude: 60.16190, longitude: 24.9045 })} />
         {markerData.map((item, idx) => (
           <Marker key={idx} coordinate={item.coord} image={item.asset} />
