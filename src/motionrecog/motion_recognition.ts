@@ -25,10 +25,8 @@ type Position = {
   z: number;
 };
 
-// TMP Ret type
 export function detect_figure(time_series: InputDatum[]): Movement[] {
   let positions = track_position(time_series);
-  // console.log(positions);
   let motion_periods = get_motion_periods(positions);
 
   if (!motion_periods) {
@@ -152,8 +150,6 @@ function check_if_circle(
         cut_off += 1;
       }
     }
-    console.log("c " + sax + " cc " + say);
-    console.log("cnn " + cut_off / n);
     if (cut_off / n > 0.6) {
       probably_circle = false;
     }
