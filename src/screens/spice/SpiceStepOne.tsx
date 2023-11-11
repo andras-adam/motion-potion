@@ -1,6 +1,8 @@
-import { Image, StyleSheet, TouchableHighlight, TouchableWithoutFeedback, View, Text } from 'react-native'
+import { Image, StyleSheet, View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { UseNavigation } from '../../types/navigation'
+import { HeaderBack } from '../../components/HeaderBack'
+import { ActionButton } from '../../components/ActionButton'
 
 
 export function SpiceStepOne() {
@@ -9,25 +11,13 @@ export function SpiceStepOne() {
   return (
     <View style={styles.screen}>
 
-      <View style={styles.returnAbs}>
-        <TouchableWithoutFeedback
-          onPress={() => navigate('Map')}
-          style={styles.touchable}
-        >
-          <View style={styles.touchableContent}></View>
-        </TouchableWithoutFeedback>
-      </View>
+      {/* Back button */}
+
+      <HeaderBack onPress={() => navigate('Map')} />
 
       {/* Touchable hitbox for the image button */}
 
-      <View style={styles.absolute}>
-        <TouchableWithoutFeedback
-          onPress={() => navigate('SpiceSpellStepTwo')}
-          style={styles.touchable}
-        >
-          <View style={styles.touchableContent}></View>
-        </TouchableWithoutFeedback>
-      </View>
+      <ActionButton onPress={() => navigate('SpiceSpellStepTwo')} />
 
       {/* Fullscreen image */}
 
@@ -35,7 +25,6 @@ export function SpiceStepOne() {
         source={require('../../../assets/spell/spice_spell_step_1.png')}
         style={styles.image}
       />
-
     </View>
   )
 }
@@ -46,34 +35,9 @@ const styles = StyleSheet.create({
     position: 'relative',
     backgroundColor: '#000000'
   },
-  absolute: {
-    position: 'absolute',
-    // borderColor: '#ff0000',
-    // borderWidth: 2,
-    bottom: 32,
-    left: 16,
-    right: 16,
-    height: 96,
-    zIndex: 100
-  },
-  touchable: {
-    flex: 1
-  },
-  touchableContent: {
-    flex: 1
-  },
   image: {
     objectFit: 'cover',
     width: '100%',
     height: '100%'
-  },
-  returnAbs: {
-    position: "absolute",
-    top: 32,
-    left: 0,
-    right: 350,
-    height: 96,
-    zIndex: 100,
-    alignSelf: "flex-start",
   }
 })
