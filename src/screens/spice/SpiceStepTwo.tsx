@@ -9,7 +9,7 @@ import {
 } from "../../motionrecog/motion_recognition";
 import { Subscription } from "expo-sensors/build/Pedometer";
 import { DeviceMotion, DeviceMotionMeasurement } from "expo-sensors";
-import { HeaderBack } from '../../components/HeaderBack'
+import { HeaderBack } from "../../components/HeaderBack";
 
 export function SpiceStepTwo() {
   const { navigate } = useNavigation<UseNavigation<"SpellStepTwo">>();
@@ -38,7 +38,7 @@ export function SpiceStepTwo() {
       i.current = 0;
       let res = detect_figure(motionData.current);
       for (const movement of res) {
-        if (movement == Movement.circle) {
+        if (movement == Movement.line_x) {
           if (listenerRef.current.length > 0) {
             listenerRef.current[0].remove();
           }
@@ -78,10 +78,9 @@ export function SpiceStepTwo() {
 
   return (
     <View style={styles.screen}>
-
       {/* Back button */}
 
-      <HeaderBack onPress={() => navigate('Map')} />
+      <HeaderBack onPress={() => navigate("Map")} />
 
       {/* Fullscreen image */}
 
@@ -103,5 +102,5 @@ const styles = StyleSheet.create({
     objectFit: "cover",
     width: "100%",
     height: "100%",
-  }
+  },
 });
