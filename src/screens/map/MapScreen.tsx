@@ -46,7 +46,7 @@ export function MapScreen() {
         { latitude: location.latitude, longitude: location.longitude },
         markerCoord
       );
-      const threshold = 20;
+      const threshold = 200;
 
       if (distance <= threshold) {
         setIsProximityPopupVisible(true);
@@ -194,6 +194,13 @@ export function MapScreen() {
         <Image source={require("../../../assets/Icon-Left.png")} />
       </TouchableHighlight >
 
+      <View style={styles.bottomMenuContainer}>
+        <Image source={require("../../../assets/Quest-Map.png")} />
+        <Image source={require("../../../assets/BackPack-Map.png")} />
+        <Image source={require("../../../assets/Wizard-Map.png")} />
+
+      </View>
+
     </View>
   );
 }
@@ -249,6 +256,17 @@ const styles = StyleSheet.create({
     lineHeight: 21,
     letterSpacing: 0.25,
     color: 'white',
+  },
+  bottomMenuContainer: {
+    position: 'absolute',
+    bottom: '5%',
+    alignSelf: "center",
+    backgroundColor: "#120733",
+    width: "100%",
+    opacity: 0.8,
+    flexDirection: "row",
+    justifyContent: "space-around",
+
   }
 });
 
