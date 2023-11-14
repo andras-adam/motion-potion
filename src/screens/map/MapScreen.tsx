@@ -48,10 +48,11 @@ export function MapScreen() {
         { latitude: location.latitude, longitude: location.longitude },
         markerCoord
       );
-      //Threshold increased to 1km for testing purpouses. Within normal deployment - 20m
+      //Threshold increased to 1km for testing purposes. Within normal deployment - 20m
       const threshold = 1000;
 
-      if (distance <= threshold) {
+      if (true) {
+        // if (distance <= threshold) {
         setIsTooFarPopupVisible(false);
         if (marker === "pumpkin") {
           navigate("SpellStepOne");
@@ -274,7 +275,11 @@ export function MapScreen() {
           </View>
         </Modal>
       )}
-      <View style={styles.infoContainer}><Text style={styles.infoDesc}>No walking mode ENABLED for testing indoors</Text></View>
+      <View style={styles.infoContainer}>
+        <Text style={styles.infoDesc}>
+          No walking mode - all distance checks disabled
+        </Text>
+      </View>
       <View style={styles.menuContainer}>
         <TouchableHighlight onPress={() => navigate("Quests")}>
           <Image source={require("../../../assets/Quest-Map.png")} />
@@ -367,5 +372,5 @@ const styles = StyleSheet.create({
   infoDesc: {
     color: "white",
     fontSize: 18,
-  }
+  },
 });
