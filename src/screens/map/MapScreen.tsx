@@ -276,9 +276,9 @@ export function MapScreen() {
         </Modal>
       )}
       <View style={styles.infoContainer}>
-        <Text style={styles.infoDesc}>
-          No walking mode - all distance checks disabled
-        </Text>
+        {/*<Text style={styles.infoDesc}>*/}
+        {/*  No walking mode - all distance checks disabled*/}
+        {/*</Text>*/}
       </View>
       <View style={styles.menuContainer}>
         <TouchableHighlight onPress={() => navigate("Quests")}>

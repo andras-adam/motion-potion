@@ -1,6 +1,6 @@
 {
   "name": "motion-potion",
-  "version": "1.0.0",
+  "version": "1.0.6",
   "private": true,
   "license": "Apache-2.0",
   "main": "src/App.tsx",
